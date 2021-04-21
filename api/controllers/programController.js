@@ -21,7 +21,15 @@ const getProgramById = async (req, res) => {
 // Does not give any responses
 const getProgramSchedule = async (req, res) => {
   let programSchedule = await fetch(
-    `http://api.sr.se/api/v2/scheduledepisodes?programid=${req.params.programId}&${json}&${paginationFalse}`);
+    `http://api.sr.se/api/v2/scheduledepisodes?programid=${req.params.programId}&${json}`);
+  
+  programSchedule = await programSchedule.json();
+  res.json(programSchedule);
+}
+
+const getProgramBroadcasts = async (req, res) => {
+  let programSchedule = await fetch(
+    `http://api.sr.se/api/v2/broadcasts?programid=${req.params.programId}&${json}&${paginationFalse}`);
   
   programSchedule = await programSchedule.json();
   res.json(programSchedule);
@@ -30,5 +38,6 @@ const getProgramSchedule = async (req, res) => {
 module.exports = {
   getAllPrograms,
   getProgramById,
-  getProgramSchedule
+  getProgramSchedule,
+  getProgramBroadcasts,
 }
