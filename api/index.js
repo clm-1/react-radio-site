@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 
+const userRoutes = require('./routes/userRoutes');
 const channelRoutes = require('./routes/channelRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const programRoutes = require('./routes/programRoutes');
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 
 // Middleware to check routes
+app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/channels', channelRoutes);
 app.use('/api/v1/categories', categoryRoutes);
 app.use('/api/v1/programs', programRoutes);
