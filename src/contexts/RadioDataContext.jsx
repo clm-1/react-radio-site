@@ -10,19 +10,19 @@ const RadioDataProvider = (props) => {
     let channels = await fetch('/api/v1/channels');
     channels = await channels.json();
     console.log(channels.channels);
-    setChannels(channels);
+    setChannels(channels.channels);
   }
 
-  const getAllCatgories = async () => {
+  const getAllCategories = async () => {
     let categories = await fetch('/api/v1/categories');
     categories = await categories.json();
     console.log(categories.programcategories);
-    setCategories(categories);
+    setCategories(categories.programcategories);
   }
 
   useEffect(() => {
     getAllChannels();
-    getAllCatgories();
+    getAllCategories();
   }, []);
   
   const values = {
