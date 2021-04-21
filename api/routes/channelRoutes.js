@@ -5,6 +5,6 @@ const channelController = require('../controllers/channelController');
 router.get('', channelController.getAllChannels);
 router.get('/:channelId', channelController.getChannelById);
 router.get('/:channelId/programs', channelController.getAllProgramsByChannel);
-router.get('/schedule/:channelId', channelController.getChannelSchedule);
+router.get('/:channelId/schedule', channelController.getChannelSchedule);
 
 module.exports = router;

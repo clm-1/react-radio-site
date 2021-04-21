@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 
 const channelRoutes = require('./routes/channelRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 const programRoutes = require('./routes/programRoutes');
 const port = 3001;
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Middleware to check routes
 app.use('/api/v1/channels', channelRoutes);
+app.use('/api/v1/categories', categoryRoutes);
 app.use('/api/v1/programs', programRoutes);
 
 app.listen(port, err => {
