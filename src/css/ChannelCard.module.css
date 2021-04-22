@@ -1,0 +1,11 @@
+.channelCard {
+  margin-bottom: .4rem;
+}
+
+.channelCard img {
+  max-width: 100%;
+}
+
+.channelCard p {
+  margin-top: -.3rem;
+}

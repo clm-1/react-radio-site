@@ -4,13 +4,19 @@ export const RadioDataContext = createContext();
 
 const RadioDataProvider = (props) => {
   const [channels, setChannels] = useState(null);
+  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
+  const [popularChannels, setPopularChannels] = useState(null);
   const [categories, setCategories] = useState(null);
+
 
   const getAllChannels = async () => {
     let channels = await fetch('/api/v1/channels');
     channels = await channels.json();
     console.log(channels.channels);
-    setChannels(channels.channels);
+    setChannels(channels.channels)
+
+    let temp = channels.channels.filter(channel => popularChannelsIds.includes(channel.id));
+    setPopularChannels(temp);
   }
 
   const getAllCategories = async () => {
@@ -28,6 +34,7 @@ const RadioDataProvider = (props) => {
   const values = {
     channels,
     categories,
+    popularChannels,
   };
 
   return (

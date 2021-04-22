@@ -9,3 +9,8 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+.site-container {
+  max-width: 1050px;
+  margin: 0 auto;
+}
