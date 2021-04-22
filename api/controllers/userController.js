@@ -26,8 +26,33 @@ const getFavouritesByUserId = (req, res) => {
   });
 }
 
+const register = (req, res) => {
+  let query = `
+    INSERT INTO users (email, firstName, lastName, password)
+    VALUES ($email, $firstName, $lastName, $password)`
+  let params = {
+    $email: req.body.email,
+    $firstName: req.body.firstName,
+    $lastName: req.body.lastName,
+    $password: req.body.password,
+  }
+  
+  console.log(req.body);
+
+  db.run(query, params, function (err) {
+    if (err) {
+      console.log('there was an error')
+      console.log(err);
+    }
+    
+    res.json({ success: 'User was registered', lastID: this.lastID });
+  });
+}
+
+
 module.exports = {
   getAllUsers,
   getUserById,
   getFavouritesByUserId,
+  register,
 }
