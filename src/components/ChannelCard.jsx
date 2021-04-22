@@ -1,8 +1,8 @@
-import style from '../css/ShowCard.module.css';
+import style from '../css/ChannelCard.module.css';
 
 const ShowCard = ({ channel }) => {
   return ( 
-    <div className={style.showCard}>
+    <div className={style.channelCard}>
       <img src={channel.image} alt=""/>
       <p>{channel.name} - {channel.id}</p>
     </div>

@@ -1,11 +1,11 @@
-.showCard {
+.channelCard {
   margin-bottom: .4rem;
 }
 
-.showCard img {
+.channelCard img {
   max-width: 100%;
 }
 
-.showCard p {
+.channelCard p {
   margin-top: -.3rem;
 }

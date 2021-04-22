@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { RadioDataContext } from '../contexts/RadioDataContext';
-import ShowCard from '../components/ShowCard';
+import ChannelCard from '../components/ChannelCard';
+import CategoryCard from '../components/CategoryCard';
 import style from '../css/Home.module.css';
 import Hero from '../components/Hero';
 
@@ -8,37 +9,21 @@ const Home = () => {
   const { channels, popularChannels, categories } = useContext(RadioDataContext);
   const [tab, setTab] = useState('popular');
 
-  let allChannelsTab = 'Loading...';
-  let popularChannelsTab = 'Loading...';
-  let categoryTab = 'Loading...';
-  let content = 'Loading...';
-  
+  let content = 'Loading...';  
   if (channels && popularChannels && categories) {
     if (tab === 'all') {
       content = channels.map(channel => (
-        <ShowCard channel={channel} key={channel.id} />
+        <ChannelCard channel={channel} key={channel.id} />
       ))
     } else if (tab === 'popular') {
       content = popularChannels.map(channel => (
-        <ShowCard channel={channel} key={channel.id} />
+        <ChannelCard channel={channel} key={channel.id} />
       ))
     } else if (tab === 'categories') {
       content = categories.map(category => (
-        <ShowCard channel={category} key={category.name} />
+        <CategoryCard category={category} key={category.name} />
       ))
     }
-  }
-
-  if (popularChannels) {
-    popularChannelsTab = popularChannels.map(channel => (
-      <ShowCard channel={channel} key={channel.id} />
-    ))
-  }
-
-  if (categories) {
-    categoryTab = categories.map(category => (
-      <ShowCard channel={category} key={category.name} />
-    ))
   }
   
 
