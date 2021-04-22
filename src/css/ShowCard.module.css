@@ -1,0 +1,11 @@
+.showCard {
+  margin-bottom: .4rem;
+}
+
+.showCard img {
+  max-width: 100%;
+}
+
+.showCard p {
+  margin-top: -.3rem;
+}

@@ -1,4 +1,5 @@
 .navbarWrapper {
+  width: 100%;
   display: flex;
   padding: 1.2rem;
   background-color: rgb(247, 247, 247);
