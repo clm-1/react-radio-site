@@ -4,7 +4,7 @@ export const RadioDataContext = createContext();
 
 const RadioDataProvider = (props) => {
   const [channels, setChannels] = useState(null);
-  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755]);
+  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
   const [popularChannels, setPopularChannels] = useState(null);
   const [categories, setCategories] = useState(null);
 

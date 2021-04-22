@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { RadioDataContext } from '../contexts/RadioDataContext';
 import ShowCard from '../components/ShowCard';
 import style from '../css/Home.module.css';
+import Hero from '../components/Hero';
 
 const Home = () => {
   const { channels, popularChannels, categories } = useContext(RadioDataContext);
@@ -43,11 +44,13 @@ const Home = () => {
 
   return ( 
     <div className={style.homeWrapper}>
-      <div>
-        <h4 onClick={() => setTab('popular')}>Populära kanaler</h4>
-        <h4 onClick={() => setTab('all')}>Alla kanaler</h4>
-        <h4 onClick={() => setTab('categories')}>Kategorier</h4>
+      <Hero />
+      <div className={style.tabLinks}>
+        <h4 className={`${tab !== 'popular' && style.notActive}`} onClick={() => setTab('popular')}>Populära kanaler</h4>
+        <h4 className={`${tab !== 'all' && style.notActive}`} onClick={() => setTab('all')}>Alla kanaler</h4>
+        <h4 className={`${tab !== 'categories' && style.notActive}`} onClick={() => setTab('categories')}>Kategorier</h4>
       </div>
+      <hr/>
       <div className={style.cardsWrapper}>
         { content }
       </div>

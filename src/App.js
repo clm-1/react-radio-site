@@ -6,14 +6,14 @@ import Home from './pages/Home';
 function App() {
   return (
     <div className="App">
-      <div className="site-container">
         <Router>
           <RadioDataProvider>
             <Navbar />
-            <Route exact path='/' component={Home} />
+            <div className="site-container">
+              <Route exact path='/' component={Home} />
+            </div>
           </RadioDataProvider>
         </Router>
-      </div>
     </div>
   );
 }
