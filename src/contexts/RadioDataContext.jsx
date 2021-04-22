@@ -7,6 +7,7 @@ const RadioDataProvider = (props) => {
   const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
   const [popularChannels, setPopularChannels] = useState(null);
   const [categories, setCategories] = useState(null);
+  const [programs, setPrograms] = useState(null);
 
 
   const getAllChannels = async () => {
@@ -26,6 +27,12 @@ const RadioDataProvider = (props) => {
     setCategories(categories.programcategories);
   }
 
+  const getPrograms = async () => {
+    let programs = await fetch('/api/v1/programs');
+    programs = await programs.json();
+    setPrograms(programs.programs);
+  }
+
   useEffect(() => {
     getAllChannels();
     getAllCategories();
@@ -35,6 +42,8 @@ const RadioDataProvider = (props) => {
     channels,
     categories,
     popularChannels,
+    programs,
+    getPrograms,
   };
 
   return (
