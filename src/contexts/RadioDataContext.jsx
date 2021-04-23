@@ -5,10 +5,11 @@ export const RadioDataContext = createContext();
 const RadioDataProvider = (props) => {
   const [channels, setChannels] = useState(null);
   const [oneChannel, setOneChannel] = useState(null);
-  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
-  const [popularChannels, setPopularChannels] = useState(null);
+  const [channelSchedule, setChannelSchedule] = useState(null);
   const [categories, setCategories] = useState(null);
   const [programs, setPrograms] = useState(null);
+  const [popularChannels, setPopularChannels] = useState(null);
+  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
 
 
   const getAllChannels = async () => {
@@ -46,6 +47,12 @@ const RadioDataProvider = (props) => {
     setPrograms(programs.programs);
   }
 
+  const getChannelSchedule = async (channelId) => {
+    let schedule = await fetch(`/api/v1/channels/${channelId}/schedule`);
+    schedule = await schedule.json();
+    setChannelSchedule(schedule.schedule);
+  }
+
   useEffect(() => {
     getAllChannels();
     getAllCategories();
@@ -60,6 +67,9 @@ const RadioDataProvider = (props) => {
     oneChannel,
     getChannelById,
     getAllProgramsByChannel,
+    getChannelSchedule,
+    channelSchedule,
+    setPrograms,
   };
 
   return (

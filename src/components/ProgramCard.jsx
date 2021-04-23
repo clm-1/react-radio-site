@@ -33,7 +33,7 @@ const ProgramCard = ({ program }) => {
       <div className={style.infoText}>
         <h4 className={style.title}>{ program.name }</h4>
         <hr/>
-        <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' }</p>
+        <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' } { program.programcategory ? `- ${program.programcategory.name}` : ''}</p>
       </div>
     </div>
    );
