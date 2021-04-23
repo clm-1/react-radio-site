@@ -21,7 +21,7 @@ const ProgramList = () => {
 
   return ( 
     <div className={style.programListWrapper}>
-      <h3>Program name</h3>
+      <div className={style.header}></div>
       <hr/>
       <div className={style.programList}>
         { content }

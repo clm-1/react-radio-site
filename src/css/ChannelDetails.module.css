@@ -1,0 +1,50 @@
+.detailsPageWrapper {
+  padding: 1.2rem;
+}
+
+.detailsPageWrapper header {
+  width: 100%;
+  background-color: goldenrod;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.headerInfo {
+  padding: 1rem;
+}
+
+.headerImgWrapper {
+  width: 30%;
+  height: 30vh;
+  background-color: salmon
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: .3rem;
+}
+
+.description {
+  margin-top: 1rem;
+}
+
+.tabLinks {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: .7rem;
+}
+
+.tabLinks * {
+  font-size: .95rem;
+  margin-right: .8rem;
+  font-weight: normal;
+}
+
+
