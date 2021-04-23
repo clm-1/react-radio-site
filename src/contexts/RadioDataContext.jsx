@@ -4,6 +4,7 @@ export const RadioDataContext = createContext();
 
 const RadioDataProvider = (props) => {
   const [channels, setChannels] = useState(null);
+  const [oneChannel, setOneChannel] = useState(null);
   const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
   const [popularChannels, setPopularChannels] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -33,6 +34,18 @@ const RadioDataProvider = (props) => {
     setPrograms(programs.programs);
   }
 
+  const getChannelById = async (channelId) => {
+    let channel = await fetch(`/api/v1/channels/${channelId}`);
+    channel = await channel.json();
+    setOneChannel(channel.channel);
+  }
+
+  const getAllProgramsByChannel = async (channelId) => {
+    let programs = await fetch(`/api/v1/channels/${channelId}/programs`);
+    programs = await programs.json();
+    setPrograms(programs.programs);
+  }
+
   useEffect(() => {
     getAllChannels();
     getAllCategories();
@@ -44,6 +57,9 @@ const RadioDataProvider = (props) => {
     popularChannels,
     programs,
     getPrograms,
+    oneChannel,
+    getChannelById,
+    getAllProgramsByChannel,
   };
 
   return (
