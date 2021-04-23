@@ -1,0 +1,31 @@
+.programCard {
+  display: flex;
+  background-color: rgb(247, 245, 242);
+}
+
+.programCard .imgWrapper {
+  max-height: 95px;
+  max-width: 95px;
+}
+
+.imgWrapper img {
+  height: 100%;
+}
+
+.infoText {
+  flex: 1;
+  align-self: center;
+  padding: .5rem .7rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: .3rem;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: .2rem;
+}
