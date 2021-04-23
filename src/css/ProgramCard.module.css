@@ -21,11 +21,22 @@
 .title {
   font-size: 1rem;
   font-weight: 400;
-  margin-bottom: .3rem;
 }
 
 .description {
   font-size: 1rem;
   font-weight: 300;
   margin-top: .2rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .3rem;
+}
+
+.titleRow i {
+  font-size: 1.3rem;
+  margin-right: .5rem;
 }

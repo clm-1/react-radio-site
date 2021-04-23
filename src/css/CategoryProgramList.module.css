@@ -1,0 +1,25 @@
+.categoryProgramList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+}
+
+.categoryTitleRow {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.categoryTitleRow span {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-right: 1.6rem;
+  cursor: pointer;
+}
+
+.categoryTitleRow h4 {
+  font-weight: 400;
+  font-size: 1.3rem;
+  position: relative;
+  top: -1px;
+}

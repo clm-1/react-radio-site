@@ -20,7 +20,7 @@ const ChannelDetails = (props) => {
     }
   }, []);
 
-  let content = 'Loading...';
+  let content = 'Laddar...';
   if (oneChannel) {
     content = <div>
       <header>
@@ -30,7 +30,7 @@ const ChannelDetails = (props) => {
         <div className={style.headerInfo}>
           <div className={style.titleRow}>
             <h3 className={style.title}>{ oneChannel.name }</h3>
-            <h3 className={style.icon}>ICON</h3>
+            <i class="far fa-heart"></i>
           </div>
           <hr/>
           <p className={style.description}>{ oneChannel.tagline }</p>
@@ -39,7 +39,7 @@ const ChannelDetails = (props) => {
     </div>
   }
 
-  let programList = 'Loading...';
+  let programList = 'Laddar...';
   if (programs) {
     programList = 
       <div className={style.listWrapper}>
@@ -49,7 +49,7 @@ const ChannelDetails = (props) => {
       </div>
   }
 
-  let schedule = 'Loading...';
+  let schedule = 'Laddar...';
   if (channelSchedule) {
     schedule = channelSchedule.map((episode, i) => (
       <div className={style.scheduleItem} key={i}>

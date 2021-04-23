@@ -11,7 +11,7 @@ const ProgramList = () => {
     getPrograms();
   }, []);
 
-  let content = 'Loading';
+  let content = 'Laddar...';
   if (programs) {
     console.log(programs)
     content = programs.map(program => (
