@@ -30,7 +30,7 @@ const ChannelDetails = (props) => {
         <div className={style.headerInfo}>
           <div className={style.titleRow}>
             <h3 className={style.title}>{ oneChannel.name }</h3>
-            <i class="far fa-heart"></i>
+            <i className="far fa-heart"></i>
           </div>
           <hr/>
           <p className={style.description}>{ oneChannel.tagline }</p>
