@@ -1,0 +1,9 @@
+.programListWrapper {
+  padding: 1.2rem;
+}
+
+.programList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+}

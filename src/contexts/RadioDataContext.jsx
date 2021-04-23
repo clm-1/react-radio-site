@@ -4,9 +4,12 @@ export const RadioDataContext = createContext();
 
 const RadioDataProvider = (props) => {
   const [channels, setChannels] = useState(null);
-  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
-  const [popularChannels, setPopularChannels] = useState(null);
+  const [oneChannel, setOneChannel] = useState(null);
+  const [channelSchedule, setChannelSchedule] = useState(null);
   const [categories, setCategories] = useState(null);
+  const [programs, setPrograms] = useState(null);
+  const [popularChannels, setPopularChannels] = useState(null);
+  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
 
 
   const getAllChannels = async () => {
@@ -26,6 +29,30 @@ const RadioDataProvider = (props) => {
     setCategories(categories.programcategories);
   }
 
+  const getPrograms = async () => {
+    let programs = await fetch('/api/v1/programs');
+    programs = await programs.json();
+    setPrograms(programs.programs);
+  }
+
+  const getChannelById = async (channelId) => {
+    let channel = await fetch(`/api/v1/channels/${channelId}`);
+    channel = await channel.json();
+    setOneChannel(channel.channel);
+  }
+
+  const getAllProgramsByChannel = async (channelId) => {
+    let programs = await fetch(`/api/v1/channels/${channelId}/programs`);
+    programs = await programs.json();
+    setPrograms(programs.programs);
+  }
+
+  const getChannelSchedule = async (channelId) => {
+    let schedule = await fetch(`/api/v1/channels/${channelId}/schedule`);
+    schedule = await schedule.json();
+    setChannelSchedule(schedule.schedule);
+  }
+
   useEffect(() => {
     getAllChannels();
     getAllCategories();
@@ -35,6 +62,14 @@ const RadioDataProvider = (props) => {
     channels,
     categories,
     popularChannels,
+    programs,
+    getPrograms,
+    oneChannel,
+    getChannelById,
+    getAllProgramsByChannel,
+    getChannelSchedule,
+    channelSchedule,
+    setPrograms,
   };
 
   return (

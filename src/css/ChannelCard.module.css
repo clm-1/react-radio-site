@@ -1,9 +1,16 @@
 .channelCard {
+  cursor: pointer;
   margin-bottom: .4rem;
 }
 
 .channelCard img {
+  position: relative;
   max-width: 100%;
+}
+
+.channelCard img:hover {
+  transform: scale(1.005);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.123);
 }
 
 .channelCard p {
