@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from 'react';
-import ProgramCard from '../components/ProgramCard';
 import { RadioDataContext } from '../contexts/RadioDataContext';
+import ProgramCard from '../components/ProgramCard';
 import style from '../css/ChannelDetails.module.css';
+import DetailsHeader from '../components/DetailsHeader';
 
 const ChannelDetails = (props) => {
   const { getChannelById, getAllProgramsByChannel, oneChannel, programs, getChannelSchedule, channelSchedule, setPrograms } = useContext(RadioDataContext);
@@ -20,23 +21,17 @@ const ChannelDetails = (props) => {
     }
   }, []);
 
-  let content = 'Laddar...';
+  let header = 'Laddar...';
   if (oneChannel) {
-    content = <div>
-      <header>
-        <div className={style.headerImgWrapper}>
-          <img src={ oneChannel.image } alt=""/>
-        </div>
-        <div className={style.headerInfo}>
-          <div className={style.titleRow}>
-            <h3 className={style.title}>{ oneChannel.name }</h3>
-            <i className="far fa-heart"></i>
-          </div>
-          <hr/>
-          <p className={style.description}>{ oneChannel.tagline }</p>
-        </div>
-      </header>
-    </div>
+    const headerContent = {
+      id: oneChannel.id,
+      type: 'channel',
+      name: oneChannel.name,
+      image: oneChannel.image,
+      desc: oneChannel.tagline,
+    }
+    
+    header = <DetailsHeader headerContent={ headerContent } />
   }
 
   let programList = 'Laddar...';
@@ -67,7 +62,7 @@ const ChannelDetails = (props) => {
 
   return ( 
     <div className={style.detailsPageWrapper}>
-      { content }
+      { header }
       <div className={style.tabLinks}>
         <h4 onClick={() => setTab('all')}>Alla program</h4>
         <h4 onClick={() => setTab('schedule')}>Tablå</h4>
