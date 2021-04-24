@@ -31,7 +31,10 @@ const ProgramCard = ({ program }) => {
         <img src={program.programimage} alt=""/>
       </div>
       <div className={style.infoText}>
-        <h4 className={style.title}>{ program.name }</h4>
+        <div className={style.titleRow}>
+          <h4 className={style.title}>{ program.name }</h4>
+          <i className="far fa-heart"></i>
+        </div>
         <hr/>
         <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' } { program.programcategory ? `- ${program.programcategory.name}` : ''}</p>
       </div>

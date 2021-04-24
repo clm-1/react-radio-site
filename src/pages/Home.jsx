@@ -4,12 +4,12 @@ import ChannelCard from '../components/ChannelCard';
 import CategoryCard from '../components/CategoryCard';
 import style from '../css/Home.module.css';
 import Hero from '../components/Hero';
+import CategoryProgramList from '../components/CategoryProgramList';
 
 const Home = () => {
-  const { channels, popularChannels, categories } = useContext(RadioDataContext);
-  const [tab, setTab] = useState('popular');
+  const { channels, popularChannels, categories, tab, setTab } = useContext(RadioDataContext);
 
-  let content = 'Loading...';  
+  let content = 'Laddar...';  
   if (channels && popularChannels && categories) {
     if (tab === 'all') {
       content = channels.map(channel => (
@@ -23,9 +23,10 @@ const Home = () => {
       content = categories.map(category => (
         <CategoryCard category={category} key={category.name} />
       ))
+    } else if (tab === 'category') {
+      content = <CategoryProgramList />
     }
   }
-  
 
   return ( 
     <div className={style.homeWrapper}>
@@ -36,7 +37,7 @@ const Home = () => {
         <h4 className={`${tab !== 'categories' && style.notActive}`} onClick={() => setTab('categories')}>Kategorier</h4>
       </div>
       <hr/>
-      <div className={style.cardsWrapper}>
+      <div className={ tab !== 'category' ? style.cardsWrapper : '' }>
         { content }
       </div>
     </div>

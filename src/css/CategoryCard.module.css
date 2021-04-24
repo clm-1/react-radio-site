@@ -1,11 +1,12 @@
-.showCard {
+.categoryCard {
   margin-bottom: .4rem;
+  cursor: pointer;
 }
 
-.showCard img {
+.categoryCard img {
   max-width: 100%;
 }
 
-.showCard p {
+.categoryCard p {
   margin-top: -.3rem;
 }

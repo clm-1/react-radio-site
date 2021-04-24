@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from 'react';
-import ProgramCard from '../components/ProgramCard';
 import { RadioDataContext } from '../contexts/RadioDataContext';
+import ProgramCard from '../components/ProgramCard';
 import style from '../css/ChannelDetails.module.css';
+import DetailsHeader from '../components/DetailsHeader';
 
 const ChannelDetails = (props) => {
   const { getChannelById, getAllProgramsByChannel, oneChannel, programs, getChannelSchedule, channelSchedule, setPrograms } = useContext(RadioDataContext);
@@ -20,26 +21,20 @@ const ChannelDetails = (props) => {
     }
   }, []);
 
-  let content = 'Loading...';
+  let header = 'Laddar...';
   if (oneChannel) {
-    content = <div>
-      <header>
-        <div className={style.headerImgWrapper}>
-          <img src={ oneChannel.image } alt=""/>
-        </div>
-        <div className={style.headerInfo}>
-          <div className={style.titleRow}>
-            <h3 className={style.title}>{ oneChannel.name }</h3>
-            <h3 className={style.icon}>ICON</h3>
-          </div>
-          <hr/>
-          <p className={style.description}>{ oneChannel.tagline }</p>
-        </div>
-      </header>
-    </div>
+    const headerContent = {
+      id: oneChannel.id,
+      type: 'channel',
+      name: oneChannel.name,
+      image: oneChannel.image,
+      desc: oneChannel.tagline,
+    }
+    
+    header = <DetailsHeader headerContent={ headerContent } />
   }
 
-  let programList = 'Loading...';
+  let programList = 'Laddar...';
   if (programs) {
     programList = 
       <div className={style.listWrapper}>
@@ -49,7 +44,7 @@ const ChannelDetails = (props) => {
       </div>
   }
 
-  let schedule = 'Loading...';
+  let schedule = 'Laddar...';
   if (channelSchedule) {
     schedule = channelSchedule.map((episode, i) => (
       <div className={style.scheduleItem} key={i}>
@@ -67,7 +62,7 @@ const ChannelDetails = (props) => {
 
   return ( 
     <div className={style.detailsPageWrapper}>
-      { content }
+      { header }
       <div className={style.tabLinks}>
         <h4 onClick={() => setTab('all')}>Alla program</h4>
         <h4 onClick={() => setTab('schedule')}>Tablå</h4>
