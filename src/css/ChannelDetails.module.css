@@ -1,5 +1,5 @@
 .detailsPageWrapper {
-  padding: 1.2rem;
+  padding: 0 1.2rem;
 }
 
 .tabLinks {
@@ -56,5 +56,24 @@
 }
 
 .hrLine {
-  margin-bottom: .3rem;
+  margin-bottom: .5rem;
+}
+
+.scheduleTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.scheduleTitle h4 {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.scheduleTitle input {
+  margin-left: .5rem;
+}
+
+.scheduleTitle label {
+  font-size: .9rem;
 }

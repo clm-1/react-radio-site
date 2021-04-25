@@ -1,14 +1,5 @@
-.homeWrapper {
-  padding: 0 1.2rem;
-  width: 100%;
-}
-
-.cardsWrapper {
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .5rem;
-  margin-top: 1rem;
+.detailsPageWrapper {
+  padding: 1.2rem;
 }
 
 .tabLinks {
@@ -30,4 +21,8 @@
 
 .notActive {
   opacity: .6;
+}
+
+.hrLine {
+  margin-bottom: .7rem;
 }

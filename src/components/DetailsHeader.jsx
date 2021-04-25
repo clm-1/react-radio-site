@@ -13,6 +13,9 @@ const DetailsHeader = ({ headerContent }) => {
             <i className="far fa-heart"></i>
           </div>
           <hr/>
+          { headerContent.broadcastInfo && 
+            <p className={style.broadcastInfo}>{ headerContent.broadcastInfo }</p>
+          }
           <p className={style.description}>{ headerContent.desc }</p>
         </div>
       </header>

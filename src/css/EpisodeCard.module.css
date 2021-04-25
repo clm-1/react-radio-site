@@ -1,0 +1,32 @@
+.episodeCardWrapper {
+  display: flex;
+  background-color: rgb(247, 245, 242);
+  margin-bottom: .7rem;
+  padding: .5rem 1.2rem .5rem .5rem;
+}
+
+.imgWrapper {
+ margin-right: 1.2rem;
+ height: 100px;
+ width: 100px;
+ padding-top: .2rem;
+ padding-left: .2rem;
+}
+
+.imgWrapper img {
+ height: 100px;
+ width: 100px;
+ object-fit: cover;
+}
+
+.episodeInfo {
+}
+
+.time {
+  font-weight: 300;
+}
+
+.desc {
+  font-size: .9rem;
+  margin-top: .5rem;
+}

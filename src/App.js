@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import RadioDataProvider from './contexts/RadioDataContext';
 import ChannelDetails from './pages/ChannelDetails';
 import Home from './pages/Home';
+import LoginOrRegister from './pages/LoginOrRegister';
+import ProgramDetails from './pages/ProgramDetails';
 import ProgramList from './pages/ProgramList';
 
 function App() {
@@ -13,8 +15,10 @@ function App() {
             <Navbar />
             <div className="site-container">
               <Route exact path='/' component={Home} />
-              <Route exact path='/programs' component={ProgramList} />
+              {/* <Route exact path='/programs' component={ProgramList} /> */}
               <Route exact path='/channels/:channelId' component={ChannelDetails} />
+              <Route exact path='/programs/:programId' component={ProgramDetails} />
+              <Route exact path='/login' component={LoginOrRegister} />
             </div>
           </RadioDataProvider>
         </Router>

@@ -11,7 +11,7 @@
 }
 
 .headerImgWrapper {
-  height: 35vh;
+  height: 230px;
   background-color: salmon
 }
 
@@ -37,5 +37,11 @@
 }
 
 .description {
-  margin-top: 1rem;
+  margin-top: .4rem;
+}
+
+.broadcastInfo {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-top: .5rem;
 }
