@@ -1,5 +1,7 @@
 .programCard {
   display: flex;
+  padding: .5rem;
+  cursor: pointer;
   background-color: rgb(247, 245, 242);
 }
 

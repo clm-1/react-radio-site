@@ -8,12 +8,13 @@ const ChannelDetails = (props) => {
   const { getChannelById, getAllProgramsByChannel, oneChannel, programs, getChannelSchedule, channelSchedule, setPrograms } = useContext(RadioDataContext);
   const { channelId } = props.match.params;
   const [tab, setTab] = useState('all');
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
 
   useEffect(() => {
     // Get all data for this channel
     getChannelById(channelId);
     getAllProgramsByChannel(channelId);
-    getChannelSchedule(channelId)
+    getChannelSchedule(channelId);
 
     return () => {
       // Clean-up on leaving
@@ -44,20 +45,39 @@ const ChannelDetails = (props) => {
       </div>
   }
 
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+  }
+
+  useEffect(() => {
+    getChannelSchedule(channelId, date);
+  }, [date]);
+
   let schedule = 'Laddar...';
   if (channelSchedule) {
-    schedule = channelSchedule.map((episode, i) => (
-      <div className={style.scheduleItem} key={i}>
-        <span className={style.scheduleTime}>
-          {new Date(Number(episode.starttimeutc.slice(6, 19)))
-                .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </span>
-        <div className={style.scheduleInfo}>
-          <h4 className={style.scheduleTitle}>{episode.title}</h4>
-          <p className={style.scheduleDesc}>{episode.description}</p>
+    schedule = <div>
+      <div className={style.scheduleTitle}>
+        <h4>{ date }</h4>
+        <div>
+          <label htmlFor="date">Välj datum:</label>
+          <input id="date" type="date" value={ date } onChange={handleDateChange} />
         </div>
       </div>
-    ))
+      {
+        channelSchedule.map((episode, i) => (
+          <div className={style.scheduleItem} key={i}>
+            <span className={style.scheduleTime}>
+              {new Date(Number(episode.starttimeutc.slice(6, 19)))
+                    .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </span>
+            <div className={style.scheduleInfo}>
+              <h4 className={style.scheduleTitle}>{episode.title}</h4>
+              <p className={style.scheduleDesc}>{episode.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
   }
 
   return ( 

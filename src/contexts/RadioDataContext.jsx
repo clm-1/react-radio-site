@@ -37,6 +37,16 @@ const RadioDataProvider = (props) => {
     setPrograms(programs.programs);
   }
 
+  const getProgramById = async (programId) => {
+    let program = await fetch(`api/v1/programs/1603`);
+    program = await program.json();
+    console.log(program)
+  }
+
+  // useEffect(() => {
+  //   getProgramById();
+  // }, [])
+
   const getChannelById = async (channelId) => {
     let channel = await fetch(`/api/v1/channels/${channelId}`);
     channel = await channel.json();
@@ -49,8 +59,9 @@ const RadioDataProvider = (props) => {
     setPrograms(programs.programs);
   }
 
-  const getChannelSchedule = async (channelId) => {
-    let schedule = await fetch(`/api/v1/channels/${channelId}/schedule`);
+  const getChannelSchedule = async (channelId, date) => {
+    let scheduleDate = date ? `?date=${date}` : ``;
+    let schedule = await fetch(`/api/v1/channels/${channelId}/schedule${scheduleDate}`);
     schedule = await schedule.json();
     setChannelSchedule(schedule.schedule);
   }
@@ -84,6 +95,7 @@ const RadioDataProvider = (props) => {
     setCategoryPrograms,
     tab,
     setTab,
+    getProgramById,
   };
 
   return (

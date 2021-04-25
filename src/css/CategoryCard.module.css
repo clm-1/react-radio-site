@@ -1,6 +1,15 @@
 .categoryCard {
   margin-bottom: .4rem;
   cursor: pointer;
+  background-color: rgb(240, 237, 234);
+  background-color: rgb(233, 235, 217);
+  display: flex;
+  height: 130px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: .5rem;
+  text-align: center;
 }
 
 .categoryCard img {
@@ -8,5 +17,5 @@
 }
 
 .categoryCard p {
-  margin-top: -.3rem;
+  font-weight: 400;
 }

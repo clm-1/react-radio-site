@@ -1,6 +1,8 @@
+import { useHistory } from 'react-router-dom';
 import style from '../css/ProgramCard.module.css';
 
 const ProgramCard = ({ program }) => {
+  const history = useHistory();
   // "this is a longish string of text".replace(/^(.{11}[^\s]*).*/, "$1"); 
 
   // let temp = [];
@@ -26,7 +28,7 @@ const ProgramCard = ({ program }) => {
   // }
 
   return ( 
-    <div className={style.programCard}> 
+    <div className={style.programCard} onClick={() => history.push(`/programs/${program.id}`)}> 
       <div className={style.imgWrapper}>
         <img src={program.programimage} alt=""/>
       </div>

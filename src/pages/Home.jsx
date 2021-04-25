@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { RadioDataContext } from '../contexts/RadioDataContext';
 import ChannelCard from '../components/ChannelCard';
 import CategoryCard from '../components/CategoryCard';
@@ -8,6 +8,10 @@ import CategoryProgramList from '../components/CategoryProgramList';
 
 const Home = () => {
   const { channels, popularChannels, categories, tab, setTab } = useContext(RadioDataContext);
+
+  useEffect(() => {
+    setTab('popular');
+  }, [])
 
   let content = 'Laddar...';  
   if (channels && popularChannels && categories) {
