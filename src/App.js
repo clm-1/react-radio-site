@@ -6,7 +6,6 @@ import ChannelDetails from './pages/ChannelDetails';
 import Home from './pages/Home';
 import LoginOrRegister from './pages/LoginOrRegister';
 import ProgramDetails from './pages/ProgramDetails';
-import ProgramList from './pages/ProgramList';
 
 function App() {
   return (

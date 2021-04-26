@@ -27,26 +27,34 @@ const getFavouritesByUserId = (req, res) => {
 }
 
 const register = (req, res) => {
-  let query = `
-    INSERT INTO users (email, firstName, lastName, password)
-    VALUES ($email, $firstName, $lastName, $password)`
-  let params = {
-    $email: req.body.email,
-    $firstName: req.body.firstName,
-    $lastName: req.body.lastName,
-    $password: req.body.password,
-  }
-  
-  console.log(req.body);
+  let query = 'SELECT * FROM users WHERE email = $email';
+  params = { $email: req.body.email };
 
-  db.run(query, params, function (err) {
-    if (err) {
-      console.log('there was an error')
-      console.log(err);
+  db.get(query, params, (err, userExists) => {
+    if (userExists) {
+      res.status(400).json({ error: 'A user with that email address already exits' });
+    } else {
+      query = `
+        INSERT INTO users (email, firstName, lastName, password)
+        VALUES ($email, $firstName, $lastName, $password)`;
+      params = {
+        $email: req.body.email,
+        $firstName: req.body.firstName,
+        $lastName: req.body.lastName,
+        $password: req.body.password,
+      };
+
+    console.log(req.body);
+    db.run(query, params, function (err) {
+      if (err) {
+        console.log('there was an error')
+        console.log(err);
+      }
+      
+      res.json({ success: 'User was registered', lastID: this.lastID });
+    });
     }
-    
-    res.json({ success: 'User was registered', lastID: this.lastID });
-  });
+  })
 }
 
 
@@ -54,5 +62,5 @@ module.exports = {
   getAllUsers,
   getUserById,
   getFavouritesByUserId,
-  register,
+  register, 
 }
