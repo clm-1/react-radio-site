@@ -53,6 +53,10 @@ const UserDataProvider = (props) => {
     return result;
   }
 
+  const getFavouritesByUserId = async (userId) => {
+
+  }
+
   useEffect(() => {
     whoami();
   }, [loggedInUser])

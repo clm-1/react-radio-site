@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/RegisterForm.module.css';
 
 const LoginForm = () => {
   const { login } = useContext(UserContext);
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,6 +26,7 @@ const LoginForm = () => {
     let result = await login(userToLogin);
     if (result.success) {
       console.log(result.success);
+      history.push('/user');
     } else {
       console.log(result.error);
     }

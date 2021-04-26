@@ -5,6 +5,11 @@
   background-color: rgb(246, 246, 248);
 }
 
+.programCard:hover {
+  background-color: rgb(240, 240, 243);
+  /* box-shadow: -3px 0px 0 rgba(102, 110, 117, 0.493); */
+}
+
 .programCard .imgWrapper {
   max-height: 95px;
   max-width: 95px;
@@ -49,7 +54,7 @@ span.broadcastInfo {
   font-style: italic;
   opacity: .75;
   display: block;
-  font-size: .8rem;
+  font-size: .75rem;
   font-weight: 400;
   line-height: 1.4;
 }
