@@ -1,0 +1,22 @@
+.userHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: rgb(246, 246, 248);
+  padding: 1rem 1.2rem; 
+}
+
+.userHeader .fullName {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.userBtns {
+  display: flex;
+}
+
+.userBtns * {
+  margin-left: 1rem;
+  margin-bottom: .2rem;
+  cursor: pointer;
+}

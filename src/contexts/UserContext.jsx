@@ -6,6 +6,17 @@ const UserDataProvider = (props) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
 
+  const getFavouritesByUserId = async (userId) => {
+    let result = await fetch(`/api/v1/users/${userId}/favourites`);
+    result = await result.json();
+    const favourites = {
+      channels: result.filter(item => item.type === 'channel'),
+      programs: result.filter(item => item.type === 'program'),
+      episodes: result.filter(item => item.type === 'episode')
+    }
+    setUserFavourites(favourites);
+  }
+
   const whoami = async () => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
@@ -53,17 +64,6 @@ const UserDataProvider = (props) => {
       }
     }
     return result;
-  }
-
-  const getFavouritesByUserId = async (userId) => {
-    let result = await fetch(`/api/v1/users/${userId}/favourites`);
-    result = await result.json();
-    const favourites = {
-      channels: result.filter(item => item.type === 'channel'),
-      programs: result.filter(item => item.type === 'program'),
-      episodes: result.filter(item => item.type === 'episode')
-    }
-    setUserFavourites(favourites);
   }
 
   useEffect(() => {
