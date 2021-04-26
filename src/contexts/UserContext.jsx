@@ -4,11 +4,13 @@ export const UserContext = createContext();
 
 const UserDataProvider = (props) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [userFavourites, setUserFavourites] = useState(null);
 
   const whoami = async () => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
     setLoggedInUser(result);
+    getFavouritesByUserId(result.userId);
   }
 
   const login = async (userToLogin) => {
@@ -54,12 +56,19 @@ const UserDataProvider = (props) => {
   }
 
   const getFavouritesByUserId = async (userId) => {
-
+    let result = await fetch(`/api/v1/users/${userId}/favourites`);
+    result = await result.json();
+    const favourites = {
+      channels: result.filter(item => item.type === 'channel'),
+      programs: result.filter(item => item.type === 'program'),
+      episodes: result.filter(item => item.type === 'episode')
+    }
+    setUserFavourites(favourites);
   }
 
   useEffect(() => {
     whoami();
-  }, [loggedInUser])
+  }, [])
 
   const values = {
     register,
@@ -67,6 +76,7 @@ const UserDataProvider = (props) => {
     whoami,
     loggedInUser,
     logout,
+    userFavourites,
   }
 
   return ( 
