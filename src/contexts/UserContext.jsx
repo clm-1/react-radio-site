@@ -20,7 +20,15 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToLogin),
     })
     result = await result.json();
+    whoami();
     return result;
+  }
+
+  const logout = async () => {
+    let result = await fetch('/api/v1/users/logout');
+    result = await result.json();
+    setLoggedInUser(null);
+    console.log(result);
   }
 
   const register = async (userToRegister) => {
@@ -54,6 +62,7 @@ const UserDataProvider = (props) => {
     login,
     whoami,
     loggedInUser,
+    logout,
   }
 
   return ( 

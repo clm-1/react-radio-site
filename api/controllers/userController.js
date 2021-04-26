@@ -30,6 +30,11 @@ const login = (req, res) => {
   })
 }
 
+const logout = (req, res) => {
+  delete req.session.user;
+  res.json({ success: 'Logout successful' });
+};
+
 const getAllUsers = (req, res) => {
   let query = `SELECT * FROM users`;
   db.all(query, (err, users) => {
@@ -92,4 +97,5 @@ module.exports = {
   register,
   whoami,
   login,
+  logout,
 }

@@ -4,10 +4,10 @@ import { UserContext } from '../contexts/UserContext';
 import style from '../css/Navbar.module.css';
 
 const Navbar = () => {
-  const { loggedInUser } = useContext(UserContext);
+  const { loggedInUser, logout } = useContext(UserContext);
   const history = useHistory();
   
-  let userContent = 'Laddar...';
+  let userContent = 'Inte inloggad';
   if (loggedInUser) {
     userContent = <p>Inloggad som: {loggedInUser.firstName} {loggedInUser.lastName}</p>
   }
@@ -27,6 +27,7 @@ const Navbar = () => {
           <div>
             { userContent }
           </div>
+          <button onClick={() => logout()}>Logga ut</button>
       </nav>
     </div>
    );
