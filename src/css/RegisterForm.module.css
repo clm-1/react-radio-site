@@ -1,0 +1,14 @@
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+.registerBtn {
+  padding: 1rem;
+}
+
+.registerForm input {
+  min-height: 40px;
+  margin-bottom: .5rem;
+}
