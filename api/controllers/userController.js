@@ -3,6 +3,11 @@ const path = require('path');
 
 const db = new sqlite3.Database(path.join(__dirname, '../radioSiteDb.db'));
 
+const whoami = (req, res) => {
+  res.json(req.session.user || null);
+  return;
+}
+
 const getAllUsers = (req, res) => {
   let query = `SELECT * FROM users`;
   db.all(query, (err, users) => {
@@ -62,5 +67,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   getFavouritesByUserId,
-  register, 
+  register,
+  whoami,
 }

@@ -83,7 +83,6 @@ const RegisterForm = () => {
   }
 
   return ( 
-    <div>
       <form className={style.registerForm} onSubmit={handleSubmit}>
         <label htmlFor="first-name">Förnamn:</label>
         <input 
@@ -129,7 +128,6 @@ const RegisterForm = () => {
           required />
         <button className={style.registerBtn}>Registrera</button>
       </form>
-    </div>
    );
 }
  
