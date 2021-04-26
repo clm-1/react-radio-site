@@ -39,6 +39,7 @@ const ChannelDetails = (props) => {
   if (programs) {
     programList = 
       <div className={style.listWrapper}>
+        { programs.length === 0 && <p>Inga program listade för denna kanal.</p>}
         {programs.map(program => (
           <ProgramCard key={program.id} program={program} />
         ))}
@@ -63,6 +64,7 @@ const ChannelDetails = (props) => {
           <input id="date" type="date" value={ date } onChange={handleDateChange} />
         </div>
       </div>
+      { channelSchedule.length === 0 && <p>Ingen tablå tillgänlig för denna kanal.</p>}
       {
         channelSchedule.map((episode, i) => (
           <div className={style.scheduleItem} key={i}>

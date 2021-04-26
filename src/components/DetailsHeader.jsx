@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import style from '../css/DetailsHeader.module.css';
 
 const DetailsHeader = ({ headerContent }) => {
+  const { loggedInUser } = useContext(UserContext);
+  
   return ( 
     <div className={style.headerWrapper}>
       <header>
@@ -10,7 +14,7 @@ const DetailsHeader = ({ headerContent }) => {
         <div className={style.headerInfo}>
           <div className={style.titleRow}>
             <h3 className={style.title}>{ headerContent.name }</h3>
-            <i className="far fa-heart"></i>
+            { loggedInUser && <i className="far fa-heart"></i> }
           </div>
           <hr/>
           { headerContent.broadcastInfo && 

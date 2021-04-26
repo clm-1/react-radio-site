@@ -1,0 +1,53 @@
+.loginRegisterWrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.infoColumn {
+  width: 50%;
+  margin-right: 1.5rem;
+  background-color: rgb(246, 246, 248);
+  padding: 1.2rem;
+  padding-bottom: 2rem;
+}
+
+.shortText {
+  margin-bottom: .7rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.infoColumn p {
+  font-size: .93rem;
+  margin-top: .7rem;
+}
+
+.infoColumn ul {
+  margin-top: .5rem;
+  margin-right: 1.5rem;
+}
+
+.infoColumn li {
+  margin: .1rem 0;
+  font-size: .9rem;
+  margin-left: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: .9rem;
+  margin-top: 1rem;
+}
+
+.formColumn {
+  width: 50%;
+  min-height: 700px;
+}
+
+.infoTextBottom {
+  cursor: pointer;
+  text-align: center;
+  color: rgb(21, 78, 133);
+}
