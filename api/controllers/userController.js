@@ -8,6 +8,28 @@ const whoami = (req, res) => {
   return;
 }
 
+const login = (req, res) => {
+  let query = `SELECT * FROM users WHERE email = $email`;
+  let params = { $email: req.body.email };
+
+  db.get(query, params, (err, userInDb) => {
+    if (!userInDb) {
+      res.status(401).json({ error: 'Bad credentials' });
+      return;
+    }
+
+    if (userInDb.password === req.body.password) {
+      delete userInDb.password;
+      req.session.user = userInDb;
+      res.json({ success: 'Login successful', loggedInUser: userInDb });
+      return;
+    } else {
+      res.status(401).json({ error: 'Bad credentials' });
+      return;
+    }
+  })
+}
+
 const getAllUsers = (req, res) => {
   let query = `SELECT * FROM users`;
   db.all(query, (err, users) => {
@@ -69,4 +91,5 @@ module.exports = {
   getFavouritesByUserId,
   register,
   whoami,
+  login,
 }

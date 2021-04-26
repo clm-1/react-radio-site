@@ -6,6 +6,7 @@ const userController = require('../controllers/userController');
 // /api/v1/users
 
 router.get('/whoami', userController.whoami);
+router.post('/login', userController.login);
 router.get('', userController.getAllUsers);
 router.get('/:userId', userController.getUserById);
 router.get('/:userId/favourites', userController.getFavouritesByUserId);
