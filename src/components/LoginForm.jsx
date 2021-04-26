@@ -30,7 +30,10 @@ const LoginForm = () => {
   }
 
   return ( 
-      <form className={style.registerForm} onSubmit={handleSubmit}>
+      <div>
+        <h4 className={style.formTitle}>Logga in</h4>
+        <hr/>
+        <form className={style.registerForm} onSubmit={handleSubmit}>
         <label htmlFor="email">E-post:</label>
         <input 
           id="email" 
@@ -47,6 +50,7 @@ const LoginForm = () => {
           required />
         <button className={style.registerBtn}>Logga in</button>
       </form>
+    </div>
    );
 }
  

@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 import style from '../css/ProgramCard.module.css';
 
 const ProgramCard = ({ program }) => {
+  const { loggedInUser } = useContext(UserContext);
   const history = useHistory();
   // "this is a longish string of text".replace(/^(.{11}[^\s]*).*/, "$1"); 
 
@@ -35,10 +38,10 @@ const ProgramCard = ({ program }) => {
       <div className={style.infoText}>
         <div className={style.titleRow}>
           <h4 className={style.title}>{ program.name }</h4>
-          <i className="far fa-heart"></i>
+          { loggedInUser && <i className="far fa-heart"></i> }
         </div>
-        <hr/>
         <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' } { program.programcategory ? `- ${program.programcategory.name}` : ''}</p>
+        <span className={style.broadcastInfo}>{ program.broadcastinfo && program.broadcastinfo }</span>
       </div>
     </div>
    );
