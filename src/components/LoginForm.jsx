@@ -1,20 +1,36 @@
 import { useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import style from '../css/RegisterForm.module.css';
 
 const LoginForm = () => {
+  const { login } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.email);
+    setEmail(e.target.value);
   }
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userToLogin = {
+      email,
+      password,
+    }
+    let result = await login(userToLogin);
+    if (result.success) {
+      console.log(result.success);
+    } else {
+      console.log(result.error);
+    }
+  }
+
   return ( 
-      <form className={style.registerForm}>
+      <form className={style.registerForm} onSubmit={handleSubmit}>
         <label htmlFor="email">E-post:</label>
         <input 
           id="email" 

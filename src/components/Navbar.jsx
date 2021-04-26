@@ -1,9 +1,17 @@
+import { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 import style from '../css/Navbar.module.css';
 
 const Navbar = () => {
+  const { loggedInUser } = useContext(UserContext);
   const history = useHistory();
   
+  let userContent = 'Laddar...';
+  if (loggedInUser) {
+    userContent = <p>Inloggad som: {loggedInUser.firstName} {loggedInUser.lastName}</p>
+  }
+
   return ( 
       <div className={style.navbarWrapper}>
         <nav>
@@ -15,6 +23,9 @@ const Navbar = () => {
             <NavLink exact to="/about" activeClassName={style.activeLink}>Om sidan</NavLink>
             <NavLink exact to="/account" activeClassName={style.activeLink}>Mina sidor</NavLink>
             <NavLink exact to="/login" activeClassName={style.activeLink}>Logga in</NavLink>
+          </div>
+          <div>
+            { userContent }
           </div>
       </nav>
     </div>
