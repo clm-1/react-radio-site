@@ -82,6 +82,7 @@ const RadioDataProvider = (props) => {
     programs,
     getPrograms,
     oneChannel,
+    setOneChannel,
     getChannelById,
     getAllProgramsByChannel,
     getChannelSchedule,

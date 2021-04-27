@@ -103,7 +103,12 @@ const addFavourite = (req, res) => {
       console.log(err);
       if (err.code === 'SQLITE_CONSTRAINT') res.json({ error: 'Already in favourites'});
     } else {
-      res.json({ success: 'Favourite added', item: params });
+      res.json({ success: 'Favourite added', 
+                 item: {
+                   userIdFav: req.params.userId,
+                   showId: req.body.showId,
+                   type: req.body.type
+                 } });
     }
   })
 }

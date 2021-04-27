@@ -20,13 +20,19 @@ const UserDataProvider = (props) => {
    
     let channels = result.filter(item => item.type === 'channel');
     let programs = result.filter(item => item.type === 'program');
-    const favourites = {
-      channels: await Promise.all(channels.map(channel => getChannelById(channel.showId))),
-      programs: await Promise.all(programs.map(program => getProgramById(program.showId)))
-    }
-    console.log(favourites.programs);
-    console.log(favourites.channels);
-    setUserFavourites(favourites);
+    let fetchedChannels = [];
+    let fetchedPrograms = [];
+    for (let i = 0; i < channels.length; i++) {
+      let item = await fetch(`/api/v1/channels/${channels[i].showId}`);
+      item = await item.json();
+      fetchedChannels.push(item);
+    } 
+    for (let i = 0; i < programs.length; i++) {
+      let item = await fetch(`/api/v1/programs/${programs[i].showId}`);
+      item = await item.json();
+      fetchedPrograms.push(item);
+    } 
+    setUserFavourites({ channels: fetchedChannels, programs: fetchedPrograms });
   }
 
   const login = async (userToLogin) => {
@@ -82,6 +88,7 @@ const UserDataProvider = (props) => {
       });      
       result = await result.json();
       console.log(result);
+      getFavouritesByUserId(loggedInUser.userId);
     }
   }
 

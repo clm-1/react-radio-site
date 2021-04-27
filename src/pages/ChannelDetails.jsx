@@ -5,7 +5,7 @@ import style from '../css/ChannelDetails.module.css';
 import DetailsHeader from '../components/DetailsHeader';
 
 const ChannelDetails = (props) => {
-  const { getChannelById, getAllProgramsByChannel, oneChannel, programs, getChannelSchedule, channelSchedule, setPrograms } = useContext(RadioDataContext);
+  const { getChannelById, getAllProgramsByChannel, oneChannel, programs, getChannelSchedule, channelSchedule, setPrograms, setOneChannel } = useContext(RadioDataContext);
   const { channelId } = props.match.params;
   const [tab, setTab] = useState('all');
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -19,6 +19,7 @@ const ChannelDetails = (props) => {
     return () => {
       // Clean-up on leaving
       setPrograms(null);
+      setOneChannel(null);
     }
   }, []);
 
