@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import { RadioDataContext } from '../contexts/RadioDataContext';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
 
 const UserPage = () => {
   const { loggedInUser, userFavourites, logout } = useContext(UserContext);
+  const { getProgramById } = useContext(RadioDataContext);
 
   let welcomeMessage = 'Inte inloggad';
   if (loggedInUser) {
@@ -18,6 +20,10 @@ const UserPage = () => {
           <div onClick={() => logout()}>Logga ut</div>
         </div>
       </div>
+  }
+
+  if (userFavourites) {
+    console.log(userFavourites);
   }
 
   return ( 

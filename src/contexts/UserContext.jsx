@@ -1,27 +1,32 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
+import { RadioDataContext } from './RadioDataContext';
 
 export const UserContext = createContext();
 
 const UserDataProvider = (props) => {
+  const { getProgramById, getChannelById } = useContext(RadioDataContext);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
-
-  const getFavouritesByUserId = async (userId) => {
-    let result = await fetch(`/api/v1/users/${userId}/favourites`);
-    result = await result.json();
-    const favourites = {
-      channels: result.filter(item => item.type === 'channel'),
-      programs: result.filter(item => item.type === 'program'),
-      episodes: result.filter(item => item.type === 'episode')
-    }
-    setUserFavourites(favourites);
-  }
 
   const whoami = async () => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
     setLoggedInUser(result);
-    getFavouritesByUserId(result.userId);
+  }
+
+  const getFavouritesByUserId = async (userId) => {
+    let result = await fetch(`/api/v1/users/${userId}/favourites`);
+    result = await result.json();
+   
+    let channels = result.filter(item => item.type === 'channel');
+    let programs = result.filter(item => item.type === 'program');
+    const favourites = {
+      channels: await Promise.all(channels.map(channel => getChannelById(channel.showId))),
+      programs: await Promise.all(programs.map(program => getProgramById(program.showId)))
+    }
+    console.log(favourites.programs);
+    console.log(favourites.channels);
+    setUserFavourites(favourites);
   }
 
   const login = async (userToLogin) => {
@@ -66,9 +71,29 @@ const UserDataProvider = (props) => {
     return result;
   }
 
+  const addFavourite = async (showId, type) => {
+    if (loggedInUser) {
+      let result = await fetch(`/api/v1/users/${loggedInUser.userId}/addfavourite`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ showId, type }),
+      });      
+      result = await result.json();
+      console.log(result);
+    }
+  }
+
+  // useEffect
+
   useEffect(() => {
     whoami();
   }, [])
+
+  useEffect(() => {
+    loggedInUser && getFavouritesByUserId(loggedInUser.userId);
+  }, [loggedInUser]);
 
   const values = {
     register,
@@ -77,6 +102,7 @@ const UserDataProvider = (props) => {
     loggedInUser,
     logout,
     userFavourites,
+    addFavourite,
   }
 
   return ( 

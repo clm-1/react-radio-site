@@ -89,6 +89,24 @@ const register = (req, res) => {
   })
 }
 
+const addFavourite = (req, res) => {
+  let query = `
+    INSERT INTO favourites (userIdFav, showId, type)
+    VALUES ($userIdFav, $showId, $type)`;
+  params = {
+    $userIdFav: req.params.userId,
+    $showId: req.body.showId,
+    $type: req.body.type,
+  }
+  db.run(query, params, function (err) {
+    if (err) {
+      console.log(err);
+      if (err.code === 'SQLITE_CONSTRAINT') res.json({ error: 'Already in favourites'});
+    } else {
+      res.json({ success: 'Favourite added', item: params });
+    }
+  })
+}
 
 module.exports = {
   getAllUsers,
@@ -98,4 +116,5 @@ module.exports = {
   whoami,
   login,
   logout,
+  addFavourite,
 }

@@ -38,19 +38,16 @@ const RadioDataProvider = (props) => {
   }
 
   const getProgramById = async (programId) => {
-    let program = await fetch(`api/v1/programs/1603`);
+    let program = await fetch(`/api/v1/programs/${programId}`);
     program = await program.json();
-    console.log(program)
+    return program.program;
   }
-
-  // useEffect(() => {
-  //   getProgramById();
-  // }, [])
 
   const getChannelById = async (channelId) => {
     let channel = await fetch(`/api/v1/channels/${channelId}`);
     channel = await channel.json();
     setOneChannel(channel.channel);
+    return channel.channel;
   }
 
   const getAllProgramsByChannel = async (channelId) => {
