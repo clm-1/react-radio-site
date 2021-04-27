@@ -2,7 +2,7 @@
   display: flex;
   padding: .5rem;
   cursor: pointer;
-  background-color: rgb(246, 246, 248);
+  background-color: rgb(241, 241, 241);
 }
 
 .programCard:hover {
