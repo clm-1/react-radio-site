@@ -21,6 +21,7 @@ const ChannelDetails = (props) => {
       setPrograms(null);
       setOneChannel(null);
     }
+    // eslint-disable-next-line
   }, []);
 
   let header = 'Laddar...';
@@ -53,6 +54,7 @@ const ChannelDetails = (props) => {
 
   useEffect(() => {
     getChannelSchedule(channelId, date);
+    // eslint-disable-next-line
   }, [date]);
 
   let schedule = 'Laddar...';

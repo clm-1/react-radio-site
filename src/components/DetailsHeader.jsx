@@ -11,7 +11,6 @@ const DetailsHeader = ({ headerContent }) => {
 
   const renderHeart = () => {
     let inFavourites = false;
-    console.log(userFavourites);
     if (userFavourites) {
       userFavourites.channels.forEach(favourite => {
         if (favourite.channel.id === headerContent.id) inFavourites = true;

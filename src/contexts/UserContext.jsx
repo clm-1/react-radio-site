@@ -1,11 +1,9 @@
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { RadioDataContext } from './RadioDataContext';
 
 export const UserContext = createContext();
 
 const UserDataProvider = (props) => {
-  const { getProgramById, getChannelById } = useContext(RadioDataContext);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
   const history = useHistory();

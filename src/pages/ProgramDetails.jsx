@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
 import EpisodeCard from '../components/EpisodeCard';
 import style from '../css/ProgramDetails.module.css'
@@ -10,12 +10,13 @@ const ProgramDetails = (props) => {
   const { programId } = props.match.params;
   const [tab, setTab] = useState('latest');
   const [allLoaded, setAllLoaded] = useState(false);
-  let isMounted;
+  let ref = useRef(false);
+
 
   const getProgramById = async (programId) => {
     let program = await fetch(`/api/v1/programs/${programId}`);
     program = await program.json();
-    if (isMounted) {
+    if (ref.current) {
       setProgram(program.program);
     }
   }
@@ -40,28 +41,31 @@ const ProgramDetails = (props) => {
     await findEpisodes();
 
     console.log(episodes.episodes);
-    if (isMounted) {
+    if (ref.current) {
       setEpisodes(episodes.episodes);
     } 
   }
 
   useEffect(() => {
-    isMounted = true;
+    ref.current = true;
+    console.log('mounted', ref)
     getProgramById(programId);
     getAllEpisodesByProgam(programId);
     getAllEpisodes();
 
     return () => {
-      isMounted = false;
+      ref.current = false;
+      console.log('unmounted', ref)
     }
+    // eslint-disable-next-line
   }, []);
 
   const getAllEpisodes = async () => {
     let dateString = '';
     let episodes = await fetch(`/api/v1/episodes/${programId}${dateString}`)
     episodes = await episodes.json();
-    if (isMounted) {
-      console.log('is mounted: setting state');
+    if (ref.current) {
+      console.log('mounted: setting state');
       setAllEpisodes(episodes.episodes);
     } else {
       console.log('unmounted: did not set state')

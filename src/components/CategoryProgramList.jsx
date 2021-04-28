@@ -10,6 +10,7 @@ const CategoryProgramList = () => {
     return () => {
       setCategoryPrograms(null);
     }
+    // eslint-disable-next-line
   }, [])
 
   let content = 'Laddar...';

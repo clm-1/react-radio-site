@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { RadioDataContext } from '../contexts/RadioDataContext';
 import ChannelCard from '../components/ChannelCard';
 import CategoryCard from '../components/CategoryCard';
@@ -11,6 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     setTab('popular');
+    // eslint-disable-next-line
   }, [])
 
   let content = 'Laddar...';  
