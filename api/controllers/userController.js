@@ -1,7 +1,10 @@
+const encrypt = require('../Encrypt');
 const sqlite3 = require('sqlite3');
 const path = require('path');
 
 const db = new sqlite3.Database(path.join(__dirname, '../radioSiteDb.db'));
+
+console.log('test encrypt:', encrypt.encrypt('hej'))
 
 const whoami = (req, res) => {
   res.json(req.session.user || null);
@@ -18,6 +21,7 @@ const login = (req, res) => {
       return;
     }
 
+    req.body.password = encrypt.encrypt(req.body.password);
     if (userInDb.password === req.body.password) {
       delete userInDb.password;
       req.session.user = userInDb;
@@ -66,6 +70,7 @@ const register = (req, res) => {
     if (userExists) {
       res.status(400).json({ error: 'A user with that email address already exits' });
     } else {
+      req.body.password = encrypt.encrypt(req.body.password);
       query = `
         INSERT INTO users (email, firstName, lastName, password)
         VALUES ($email, $firstName, $lastName, $password)`;
