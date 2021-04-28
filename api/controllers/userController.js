@@ -55,6 +55,11 @@ const getUserById = (req, res) => {
 }
 
 const getFavouritesByUserId = (req, res) => {
+  if (!req.session.user) {
+    res.json('nope');
+    return;
+  }
+
   let query = `SELECT * FROM favourites WHERE userIdFav = $userId`;
   let params = { $userId: req.params.userId };
   db.all(query, params, (err, fav) => {
@@ -94,7 +99,20 @@ const register = (req, res) => {
   })
 }
 
+const removeFavourite = (req, res) => {
+  let query = `
+    DELETE FROM favourites 
+    WHERE ($userIdFav = userIdFav AND $showId = showId AND $type = type)`;
+  let params = {
+    $userIdFav: req.params.userId,
+    $showId: req.query.showId,
+    $type: req.query.type,
+  }
+  res.json({ success: 'delete', item: params });
+}
+
 const addFavourite = (req, res) => {
+  if (!req.session.user) return;
   let query = `
     INSERT INTO favourites (userIdFav, showId, type)
     VALUES ($userIdFav, $showId, $type)`;
@@ -127,4 +145,5 @@ module.exports = {
   login,
   logout,
   addFavourite,
+  removeFavourite,
 }

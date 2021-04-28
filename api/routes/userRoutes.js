@@ -12,6 +12,7 @@ router.get('', userController.getAllUsers);
 router.get('/:userId', userController.getUserById);
 router.get('/:userId/favourites', userController.getFavouritesByUserId);
 router.post('/:userId/addfavourite', userController.addFavourite);
+router.delete('/:userId/removefavourite', userController.removeFavourite);
 router.post('/register', userController.register);
 
 module.exports = router;

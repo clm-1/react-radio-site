@@ -79,6 +79,21 @@ const UserDataProvider = (props) => {
     return result;
   }
 
+  const removeFavourite = async (showId, type) => {
+    if (loggedInUser) {
+      let result = await fetch(`/api/v1/users/${loggedInUser.userId}/removefavourite?showId=${showId}&type=${type}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'aplication/json'
+        }
+      });
+      result = await result.json();
+      console.log(result)
+    }
+  }
+
+  removeFavourite(132, 'channel');
+
   const addFavourite = async (showId, type) => {
     if (loggedInUser) {
       let result = await fetch(`/api/v1/users/${loggedInUser.userId}/addfavourite`, {
