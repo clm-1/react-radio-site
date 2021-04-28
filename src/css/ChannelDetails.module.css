@@ -5,9 +5,18 @@
 }
 
 .tabLinks * {
+  position: relative;
   font-size: .95rem;
   margin-right: .8rem;
   font-weight: normal;
+}
+
+.tabLinks *:hover {
+  top: -1px;
+}
+
+.notActive {
+  opacity: .6;
 }
 
 .listWrapper {
