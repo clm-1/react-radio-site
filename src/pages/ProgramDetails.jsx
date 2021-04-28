@@ -1,33 +1,72 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DetailsHeader from '../components/DetailsHeader';
 import EpisodeCard from '../components/EpisodeCard';
-import { RadioDataContext } from '../contexts/RadioDataContext';
 import style from '../css/ProgramDetails.module.css'
 
 const ProgramDetails = (props) => {
-  // const { getProgramById } = useContext(RadioDataContext);
   const [program, setProgram] = useState(null);
   const [episodes, setEpisodes] = useState(null);
+  const [allEpisodes, setAllEpisodes] = useState(null);
   const { programId } = props.match.params;
   const [tab, setTab] = useState('latest');
+  const [allLoaded, setAllLoaded] = useState(false);
+  let isMounted;
 
   const getProgramById = async (programId) => {
     let program = await fetch(`/api/v1/programs/${programId}`);
     program = await program.json();
-    setProgram(program.program);
+    if (isMounted) {
+      setProgram(program.program);
+    }
   }
 
-  const getAllEpisodesByProgam = async (programId, date) => {
-    let episodes = await fetch(`/api/v1/episodes/${programId}`);
-    episodes = await episodes.json();
+  const getAllEpisodesByProgam = async (programId) => {
+    let toDate = new Date(Date.now()).toISOString().slice(0, 10);
+    let fromDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
+    let dateString = `&fromdate=${fromDate}&todate=${toDate}`;
+
+    let episodes;
+    const findEpisodes = async () => {
+      episodes = await fetch(`/api/v1/episodes/${programId}${dateString}`);
+      episodes = await episodes.json();
+
+      if (episodes.episodes.length === 0) {
+        toDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
+        fromDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
+        dateString = `&fromdate=${fromDate}&todate=${toDate}`;
+        await findEpisodes();
+      }
+    }
+    await findEpisodes();
+
     console.log(episodes.episodes);
-    setEpisodes(episodes.episodes);
+    if (isMounted) {
+      setEpisodes(episodes.episodes);
+    } 
   }
 
   useEffect(() => {
+    isMounted = true;
     getProgramById(programId);
     getAllEpisodesByProgam(programId);
+    getAllEpisodes();
+
+    return () => {
+      isMounted = false;
+    }
   }, []);
+
+  const getAllEpisodes = async () => {
+    let dateString = '';
+    let episodes = await fetch(`/api/v1/episodes/${programId}${dateString}`)
+    episodes = await episodes.json();
+    if (isMounted) {
+      console.log('is mounted: setting state');
+      setAllEpisodes(episodes.episodes);
+    } else {
+      console.log('unmounted: did not set state')
+    }
+  }
 
   let header = 'Laddar...';
   if (program) {
@@ -46,9 +85,11 @@ const ProgramDetails = (props) => {
   let latestEpisodes = 'Laddar...';
   let episodeList = 'Laddar...';
   if (episodes) {
-    episodeList = episodes.map(episode => (
+    episodeList = <div>
+    {episodes.map(episode => (
       <EpisodeCard key={episode.id} episode={episode} />
-    ))
+    ))}
+    </div>
     let latestEpisodesArray = [];
     let number = episodes.length > 5 ? 5 : episodes.length
     for (let i = 0; i < number; i++) {
@@ -59,6 +100,19 @@ const ProgramDetails = (props) => {
     ))
   }
 
+  const buttonClick = () => {
+    setEpisodes(allEpisodes)
+    setAllLoaded(true);
+  }
+
+  const renderButton = () => {
+    if (allEpisodes && tab === 'all') {
+      if (allEpisodes.length) {
+        return <button className={style.showEpisodesBtn} onClick={() => buttonClick()}>Visa alla avsnitt</button>;
+      }
+    }
+  }
+
   return ( 
     <div className={style.detailsPageWrapper}>
       { header }
@@ -66,13 +120,16 @@ const ProgramDetails = (props) => {
         <h4 onClick={() => setTab('latest')} className={`${tab !== 'latest' && style.notActive}`}>
           Senaste avsnitten
         </h4>
-        <h4 onClick={() => setTab('all')} className={`${tab !== 'all' && style.notActive}`}>
+        <h4 onClick={() =>  setTab('all')} className={`${tab !== 'all' && style.notActive}`}>
           Alla avsnitt
         </h4>
       </div>
       <hr className={style.hrLine}/>
       <div>
         { tab === 'latest' ? latestEpisodes : episodeList }
+      </div>
+      <div className={style.buttonWrapper}>
+        { !allLoaded ? renderButton() : '' }
       </div>
     </div>
    );
