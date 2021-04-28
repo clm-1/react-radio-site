@@ -1,7 +1,10 @@
+const encrypt = require('../Encrypt');
 const sqlite3 = require('sqlite3');
 const path = require('path');
 
 const db = new sqlite3.Database(path.join(__dirname, '../radioSiteDb.db'));
+
+console.log('test encrypt:', encrypt.encrypt('guybrush'))
 
 const whoami = (req, res) => {
   res.json(req.session.user || null);
@@ -18,6 +21,7 @@ const login = (req, res) => {
       return;
     }
 
+    req.body.password = encrypt.encrypt(req.body.password);
     if (userInDb.password === req.body.password) {
       delete userInDb.password;
       req.session.user = userInDb;
@@ -66,6 +70,7 @@ const register = (req, res) => {
     if (userExists) {
       res.status(400).json({ error: 'A user with that email address already exits' });
     } else {
+      req.body.password = encrypt.encrypt(req.body.password);
       query = `
         INSERT INTO users (email, firstName, lastName, password)
         VALUES ($email, $firstName, $lastName, $password)`;
@@ -89,6 +94,29 @@ const register = (req, res) => {
   })
 }
 
+const addFavourite = (req, res) => {
+  let query = `
+    INSERT INTO favourites (userIdFav, showId, type)
+    VALUES ($userIdFav, $showId, $type)`;
+  params = {
+    $userIdFav: req.params.userId,
+    $showId: req.body.showId,
+    $type: req.body.type,
+  }
+  db.run(query, params, function (err) {
+    if (err) {
+      console.log(err);
+      if (err.code === 'SQLITE_CONSTRAINT') res.json({ error: 'Already in favourites'});
+    } else {
+      res.json({ success: 'Favourite added', 
+                 item: {
+                   userIdFav: req.params.userId,
+                   showId: req.body.showId,
+                   type: req.body.type
+                 } });
+    }
+  })
+}
 
 module.exports = {
   getAllUsers,
@@ -98,4 +126,5 @@ module.exports = {
   whoami,
   login,
   logout,
+  addFavourite,
 }

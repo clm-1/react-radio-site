@@ -17,12 +17,6 @@ const ProgramDetails = (props) => {
     setProgram(program.program);
   }
 
-  // const getBroadcastsByProgram = async (programId) => {
-  //   let broadcasts = await fetch(`/api/v1/programs/${programId}/broadcasts`);
-  //   broadcasts = await broadcasts.json();
-  //   console.log('BROADCASTS',broadcasts)
-  // }
-
   const getAllEpisodesByProgam = async (programId) => {
     let episodes = await fetch(`/api/v1/episodes/${programId}`);
     episodes = await episodes.json();

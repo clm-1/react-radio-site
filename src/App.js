@@ -6,23 +6,24 @@ import ChannelDetails from './pages/ChannelDetails';
 import Home from './pages/Home';
 import LoginOrRegister from './pages/LoginOrRegister';
 import ProgramDetails from './pages/ProgramDetails';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
     <div className="App">
         <Router>
-          <UserDataProvider>
           <RadioDataProvider>
-            <Navbar />
-            <div className="site-container">
-              <Route exact path='/' component={Home} />
-              {/* <Route exact path='/programs' component={ProgramList} /> */}
-              <Route exact path='/channels/:channelId' component={ChannelDetails} />
-              <Route exact path='/programs/:programId' component={ProgramDetails} />
-              <Route exact path='/login' component={LoginOrRegister} />
-            </div>
+            <UserDataProvider>
+              <Navbar />
+              <div className="site-container">
+                <Route exact path='/' component={Home} />
+                <Route exact path='/channels/:channelId' component={ChannelDetails} />
+                <Route exact path='/programs/:programId' component={ProgramDetails} />
+                <Route exact path='/user' component={UserPage} />
+                <Route exact path='/login' component={LoginOrRegister} />
+              </div>
+            </UserDataProvider>
           </RadioDataProvider>
-          </UserDataProvider>
         </Router>
     </div>
   );

@@ -11,6 +11,7 @@ router.get('/logout', userController.logout);
 router.get('', userController.getAllUsers);
 router.get('/:userId', userController.getUserById);
 router.get('/:userId/favourites', userController.getFavouritesByUserId);
+router.post('/:userId/addfavourite', userController.addFavourite);
 router.post('/register', userController.register);
 
 module.exports = router;
