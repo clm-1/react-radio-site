@@ -17,7 +17,7 @@ const ProgramDetails = (props) => {
     setProgram(program.program);
   }
 
-  const getAllEpisodesByProgam = async (programId) => {
+  const getAllEpisodesByProgam = async (programId, date) => {
     let episodes = await fetch(`/api/v1/episodes/${programId}`);
     episodes = await episodes.json();
     console.log(episodes.episodes);
