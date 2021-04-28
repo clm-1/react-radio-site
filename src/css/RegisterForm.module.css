@@ -76,3 +76,11 @@
 .hidden {
   display: none;
 }
+
+.loginFailedMessage {
+  color: rgb(180, 35, 35);
+  margin-top: .4rem;
+  font-size: .8rem;
+  font-style: italic;
+  display: block;
+}

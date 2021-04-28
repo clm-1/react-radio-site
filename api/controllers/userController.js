@@ -4,7 +4,7 @@ const path = require('path');
 
 const db = new sqlite3.Database(path.join(__dirname, '../radioSiteDb.db'));
 
-console.log('test encrypt:', encrypt.encrypt('hej'))
+console.log('test encrypt:', encrypt.encrypt('guybrush'))
 
 const whoami = (req, res) => {
   res.json(req.session.user || null);
