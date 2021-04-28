@@ -2,7 +2,12 @@
   display: flex;
   padding: .5rem;
   cursor: pointer;
-  background-color: rgb(247, 245, 242);
+  background-color: rgb(241, 241, 241);
+}
+
+.programCard:hover {
+  background-color: rgb(240, 240, 243);
+  /* box-shadow: -3px 0px 0 rgba(102, 110, 117, 0.493); */
 }
 
 .programCard .imgWrapper {
@@ -16,30 +21,40 @@
 
 .infoText {
   flex: 1;
-  align-self: center;
-  padding: .5rem .7rem;
+  padding: 0rem .2rem 0 .7rem;
 }
 
 .title {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .description {
   font-size: .9rem;
   font-weight: 300;
-  margin-top: .2rem;
+  margin-bottom: .3rem;
 }
 
 .titleRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: .3rem;
+  margin-bottom: .1rem;
 }
 
 .titleRow i {
-  font-size: 1.3rem;
-  margin-right: .5rem;
+  font-size: 1.4rem;
+  margin-right: .2rem;
   margin-left: .5rem;
+  position: relative;
+  top: 6px;
+}
+
+span.broadcastInfo {
+  font-style: italic;
+  opacity: .73;
+  display: block;
+  font-size: .75rem;
+  font-weight: 400;
+  line-height: 1.4;
 }

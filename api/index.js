@@ -15,6 +15,17 @@ const app = express();
 // Gives access to the body-object on the request (req.body)
 app.use(express.json());
 
+app.use(
+  session({
+    // The secret should be in it's own file, and git-ignored
+    // This is for testing purposes
+    secret: 'Test Secret 1234',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: 'auto' },
+  })
+)
+
 // Middleware to check routes
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/channels', channelRoutes);

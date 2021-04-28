@@ -1,7 +1,3 @@
-.detailsPageWrapper {
-  padding: 0 1.2rem;
-}
-
 .tabLinks {
   display: flex;
   cursor: pointer;
@@ -26,7 +22,7 @@
   min-height: 75px;
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.356);
 }
 
 .scheduleItem .scheduleInfo {

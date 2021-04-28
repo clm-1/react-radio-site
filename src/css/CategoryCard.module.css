@@ -1,14 +1,13 @@
 .categoryCard {
   margin-bottom: .4rem;
   cursor: pointer;
-  background-color: rgb(240, 237, 234);
-  background-color: rgb(233, 235, 217);
+  background-color: rgb(241, 241, 241);
   display: flex;
   height: 130px;
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
-  padding: .5rem;
+  padding: .5rem; 
   text-align: center;
 }
 

@@ -1,6 +1,6 @@
 .headerWrapper header {
   width: 100%;
-  background-color: rgb(241, 239, 233);
+  background-color: rgb(241, 241, 241);
   display: flex;
   margin-bottom: 1rem;
 }
@@ -26,12 +26,14 @@
 }
 
 .titleRow i {
+  position: relative;
+  top: -3px;
   font-size: 1.9rem;
-  margin-right: 1rem;
+  margin-right: .7rem;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 400;
   margin-bottom: .3rem;
 }
