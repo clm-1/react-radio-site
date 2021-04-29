@@ -89,10 +89,9 @@ const UserDataProvider = (props) => {
       });
       result = await result.json();
       console.log(result)
+      getFavouritesByUserId(loggedInUser.userId);
     }
   }
-
-  removeFavourite(132, 'channel');
 
   const addFavourite = async (showId, type) => {
     if (loggedInUser) {
@@ -127,6 +126,7 @@ const UserDataProvider = (props) => {
     logout,
     userFavourites,
     addFavourite,
+    removeFavourite,
   }
 
   return ( 

@@ -3,10 +3,14 @@ import { UserContext } from '../contexts/UserContext';
 import style from '../css/DetailsHeader.module.css';
 
 const DetailsHeader = ({ headerContent }) => {
-  const { loggedInUser, addFavourite, userFavourites } = useContext(UserContext);
+  const { loggedInUser, addFavourite, userFavourites, removeFavourite } = useContext(UserContext);
   
   const handleFavouriteClick = () => {
     addFavourite(headerContent.id, headerContent.type);
+  }
+
+  const handleRemoveFavourite = () => {
+    removeFavourite(headerContent.id, headerContent.type);
   }
 
   const renderHeart = () => {
@@ -23,7 +27,7 @@ const DetailsHeader = ({ headerContent }) => {
     if (!inFavourites) {
       return <i onClick={handleFavouriteClick} className="far fa-heart"></i>
     } else {
-      return <i className="fas fa-heart"></i>
+      return <i onClick={handleRemoveFavourite} className="fas fa-heart"></i>
     }
   }
 

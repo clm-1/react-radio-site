@@ -108,7 +108,14 @@ const removeFavourite = (req, res) => {
     $showId: req.query.showId,
     $type: req.query.type,
   }
-  res.json({ success: 'delete', item: params });
+  db.run(query, params, function (err) {
+    if (err) {
+      res.json({ error: 'There was an error', type: err })
+      return;
+    } else {
+      res.json({ success: 'Favourite was removed', changes: this.changes })
+    }
+  })
 }
 
 const addFavourite = (req, res) => {
