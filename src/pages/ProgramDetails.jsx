@@ -111,7 +111,7 @@ const ProgramDetails = (props) => {
 
   const renderButton = () => {
     if (allEpisodes && tab === 'all') {
-      if (allEpisodes.length) {
+      if (allEpisodes.length > episodes.length) {
         return <button className={style.showEpisodesBtn} onClick={() => buttonClick()}>Visa alla avsnitt</button>;
       }
     }

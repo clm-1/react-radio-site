@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className={style.navbarWrapper}>
         <nav>
           <div className={style.logo} onClick={() => logoClick()}>
-            A LOGO
+            RADIO
           </div>
           <div className={style.linkWrapper}>
             <NavLink exact to="/" activeClassName={style.activeLink}>Kanaler {`&`} Program</NavLink>
