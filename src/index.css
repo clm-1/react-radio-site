@@ -16,7 +16,9 @@ body {
 }
 
 .site-container {
+  position: relative;
   max-width: 1050px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 1.2rem;
 }
