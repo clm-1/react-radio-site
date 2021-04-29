@@ -47,6 +47,14 @@ const getAllUsers = (req, res) => {
 }
 
 const getUserById = (req, res) => {
+  if (!req.session.user) {
+    res.json('Not logged in');
+    return;
+  } else if (req.session.user.userId != req.params.userId) {
+    res.json('Not correct user');
+    return;
+  }
+  
   let query = `SELECT * FROM users WHERE userId = $userId`;
   let params = { $userId: req.params.userId };
   db.get(query, params, (err, user) => {
@@ -56,7 +64,10 @@ const getUserById = (req, res) => {
 
 const getFavouritesByUserId = (req, res) => {
   if (!req.session.user) {
-    res.json('nope');
+    res.json('Not logged in');
+    return;
+  } else if (req.session.user.userId != req.params.userId) {
+    res.json('Not correct user');
     return;
   }
 
@@ -100,6 +111,13 @@ const register = (req, res) => {
 }
 
 const removeFavourite = (req, res) => {
+  if (req.session.user) {
+    if (req.session.user.userId != req.params.userId) {
+      res.json({ error: 'Not correct user' });
+      return;
+    }
+  }
+
   let query = `
     DELETE FROM favourites 
     WHERE ($userIdFav = userIdFav AND $showId = showId AND $type = type)`;
