@@ -37,6 +37,7 @@ const RegisterForm = () => {
     } else {
       setEmailCheck(false);
     }
+    // eslint-disable-next-line
   }, [email, emailConfirmation]);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ const RegisterForm = () => {
       setPasswordCheck(true);
     } else {
       setPasswordCheck(false);
-    }  
+    }
+    // eslint-disable-next-line
   }, [password, passwordConfirmation]);
 
   const handlePasswordChange = (e) => {

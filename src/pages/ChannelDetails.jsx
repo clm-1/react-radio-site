@@ -21,6 +21,7 @@ const ChannelDetails = (props) => {
       setPrograms(null);
       setOneChannel(null);
     }
+    // eslint-disable-next-line
   }, []);
 
   let header = 'Laddar...';
@@ -53,6 +54,7 @@ const ChannelDetails = (props) => {
 
   useEffect(() => {
     getChannelSchedule(channelId, date);
+    // eslint-disable-next-line
   }, [date]);
 
   let schedule = 'Laddar...';
@@ -87,8 +89,8 @@ const ChannelDetails = (props) => {
     <div className={style.detailsPageWrapper}>
       { header }
       <div className={style.tabLinks}>
-        <h4 onClick={() => setTab('all')}>Alla program</h4>
-        <h4 onClick={() => setTab('schedule')}>Tablå</h4>
+        <h4 onClick={() => setTab('all')} className={`${tab !== 'all' && style.notActive}`}>Alla program</h4>
+        <h4 onClick={() => setTab('schedule')} className={`${tab !== 'schedule' && style.notActive}`}>Tablå</h4>
       </div>
       <hr className={style.hrLine}/>
       { tab === 'all' ? programList : schedule }

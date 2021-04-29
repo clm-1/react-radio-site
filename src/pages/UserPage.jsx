@@ -1,11 +1,9 @@
-import { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
 
 const UserPage = () => {
   const { loggedInUser, userFavourites, logout } = useContext(UserContext);
-  const history = useHistory();
 
   let welcomeMessage = 'Inte inloggad';
   if (loggedInUser) {

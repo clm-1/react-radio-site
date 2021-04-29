@@ -47,6 +47,14 @@ const getAllUsers = (req, res) => {
 }
 
 const getUserById = (req, res) => {
+  if (!req.session.user) {
+    res.json('Not logged in');
+    return;
+  } else if (req.session.user.userId != req.params.userId) {
+    res.json('Not correct user');
+    return;
+  }
+  
   let query = `SELECT * FROM users WHERE userId = $userId`;
   let params = { $userId: req.params.userId };
   db.get(query, params, (err, user) => {
@@ -55,6 +63,14 @@ const getUserById = (req, res) => {
 }
 
 const getFavouritesByUserId = (req, res) => {
+  if (!req.session.user) {
+    res.json('Not logged in');
+    return;
+  } else if (req.session.user.userId != req.params.userId) {
+    res.json('Not correct user');
+    return;
+  }
+
   let query = `SELECT * FROM favourites WHERE userIdFav = $userId`;
   let params = { $userId: req.params.userId };
   db.all(query, params, (err, fav) => {
@@ -94,7 +110,34 @@ const register = (req, res) => {
   })
 }
 
+const removeFavourite = (req, res) => {
+  if (req.session.user) {
+    if (req.session.user.userId != req.params.userId) {
+      res.json({ error: 'Not correct user' });
+      return;
+    }
+  }
+
+  let query = `
+    DELETE FROM favourites 
+    WHERE ($userIdFav = userIdFav AND $showId = showId AND $type = type)`;
+  let params = {
+    $userIdFav: req.params.userId,
+    $showId: req.query.showId,
+    $type: req.query.type,
+  }
+  db.run(query, params, function (err) {
+    if (err) {
+      res.json({ error: 'There was an error', type: err })
+      return;
+    } else {
+      res.json({ success: 'Favourite was removed', changes: this.changes })
+    }
+  })
+}
+
 const addFavourite = (req, res) => {
+  if (!req.session.user) return;
   let query = `
     INSERT INTO favourites (userIdFav, showId, type)
     VALUES ($userIdFav, $showId, $type)`;
@@ -127,4 +170,5 @@ module.exports = {
   login,
   logout,
   addFavourite,
+  removeFavourite,
 }

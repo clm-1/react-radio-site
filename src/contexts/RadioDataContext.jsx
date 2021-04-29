@@ -10,7 +10,7 @@ const RadioDataProvider = (props) => {
   const [categoryPrograms, setCategoryPrograms] = useState(null);
   const [programs, setPrograms] = useState(null);
   const [popularChannels, setPopularChannels] = useState(null);
-  const [popularChannelsIds, setPopularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
+  const [popularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
   const [tab, setTab] = useState('popular');
 
 
@@ -73,6 +73,7 @@ const RadioDataProvider = (props) => {
   useEffect(() => {
     getAllChannels();
     getAllCategories();
+    // eslint-disable-next-line
   }, []);
   
   const values = {

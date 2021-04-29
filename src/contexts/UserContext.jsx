@@ -1,11 +1,9 @@
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { RadioDataContext } from './RadioDataContext';
 
 export const UserContext = createContext();
 
 const UserDataProvider = (props) => {
-  const { getProgramById, getChannelById } = useContext(RadioDataContext);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
   const history = useHistory();
@@ -81,6 +79,20 @@ const UserDataProvider = (props) => {
     return result;
   }
 
+  const removeFavourite = async (showId, type) => {
+    if (loggedInUser) {
+      let result = await fetch(`/api/v1/users/${loggedInUser.userId}/removefavourite?showId=${showId}&type=${type}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'aplication/json'
+        }
+      });
+      result = await result.json();
+      console.log(result)
+      getFavouritesByUserId(loggedInUser.userId);
+    }
+  }
+
   const addFavourite = async (showId, type) => {
     if (loggedInUser) {
       let result = await fetch(`/api/v1/users/${loggedInUser.userId}/addfavourite`, {
@@ -114,6 +126,7 @@ const UserDataProvider = (props) => {
     logout,
     userFavourites,
     addFavourite,
+    removeFavourite,
   }
 
   return ( 

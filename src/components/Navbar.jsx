@@ -6,13 +6,8 @@ import style from '../css/Navbar.module.css';
 
 const Navbar = () => {
   const { setTab } = useContext(RadioDataContext);
-  const { loggedInUser, logout } = useContext(UserContext);
+  const { loggedInUser } = useContext(UserContext);
   const history = useHistory();
-  
-  let userContent = 'Inte inloggad';
-  if (loggedInUser) {
-    userContent = <p>Inloggad som: {loggedInUser.firstName} {loggedInUser.lastName}</p>
-  }
 
   const logoClick = () => {
     history.push('/');
@@ -23,11 +18,10 @@ const Navbar = () => {
       <div className={style.navbarWrapper}>
         <nav>
           <div className={style.logo} onClick={() => logoClick()}>
-            A LOGO
+            RADIO
           </div>
           <div className={style.linkWrapper}>
             <NavLink exact to="/" activeClassName={style.activeLink}>Kanaler {`&`} Program</NavLink>
-            <NavLink exact to="/about" activeClassName={style.activeLink}>Om sidan</NavLink>
           </div>
           <div className={style.accountLinks}>
             { loggedInUser ? 
