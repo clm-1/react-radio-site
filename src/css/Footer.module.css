@@ -1,6 +1,7 @@
 .footerWrapper {
   width: 100%;
   height: 200px;
+  margin-top: 2.5rem;
   background-color: rgb(82, 138, 173);
 }
 

@@ -1,17 +1,25 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import style from '../css/ScrollToTop.module.css';
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
+  let ref = useRef(false);
 
+  useEffect(() => {
+    ref.current = true;
+
+    return () => {
+      ref.current = false;
+    }
+  }, []);
 
   const toggleButton = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 350) {
-      setVisible(true);
+      if (ref.current) setVisible(true);
     } else if (scrolled <= 350) {
-      setVisible(false);
-    }
+      if (ref.current) setVisible(false);  
+    } 
   };
 
   const scrollToTop = () =>{
