@@ -1,18 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import style from '../css/UpdateForm.module.css';
+import style from '../css/EditForm.module.css';
 
-const UpdateForm = ({ user }) => {
-  const { register } = useContext(UserContext);
+const EditForm = ({ user }) => {
+  const { editUserInfo, setEditUser } = useContext(UserContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [prevEmail, setPrevEmail] = useState('');
   const [email, setEmail] = useState('');
   const [emailConfirmation, setEmailConfirmation] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
   
   let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -26,10 +26,12 @@ const UpdateForm = ({ user }) => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setEmailExists(false);
   }
 
   const handleEmailConfirmationChange = (e) => {
     setEmailConfirmation(e.target.value);
+    setEmailExists(false);
   }
 
   useEffect(() => {
@@ -38,7 +40,6 @@ const UpdateForm = ({ user }) => {
       setLastName(user.lastName)
       setEmail(user.email)
       setEmailConfirmation(user.email)
-      setPrevEmail(user.email)
     }
   }, [user])
 
@@ -71,39 +72,35 @@ const UpdateForm = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!password.match(pattern)) {
-      console.log('kasst lösenord');
       return;
     }
     if (email !== emailConfirmation || password !== passwordConfirmation) {
-      console.log('Blev strul!')
-      if (email !== emailConfirmation) {
-        console.log('Epost-fälten stämmer inte överens');
-      }
-      if (password !== passwordConfirmation) {
-        console.log('Lösenorden stämmer inte')
-      }
+      // console.log('Blev strul!')
+      // if (email !== emailConfirmation) {
+      //   console.log('Epost-fälten stämmer inte överens');
+      // }
+      // if (password !== passwordConfirmation) {
+      //   console.log('Lösenorden stämmer inte')
+      // }
       return;
     } else {
-      const updatedInfo = {
+      const editedInfo = {
         firstName,
         lastName,
         email,
         password,
-        prevEmail,
       }
-      console.log(updatedInfo);
-      // let result = await register(updatedInfo);
-      // if (result.success) {
-      //   console.log(result.success);
-      // } else {
-      //   console.log(result.error);
-      // }
-      // setFirstName('');
-      // setLastName('');
-      // setEmail('');
-      // setEmailConfirmation('');
-      // setPassword('');
-      // setPasswordConfirmation('');
+      let result = await editUserInfo(editedInfo);
+      if (result.success) {
+        console.log(result.success);
+      } else if (result.emailExists) {
+        console.log(result.emailExists);
+        setEmailExists(true);
+      } else {
+        console.log(result.error);
+      }
+      setPassword('');
+      setPasswordConfirmation('');
     }
   }
 
@@ -130,7 +127,7 @@ const UpdateForm = ({ user }) => {
     if (!passwordCheck) {
       if (password || passwordConfirmation) {
         return (
-          <p className={`${style.passwordInfo}`}>Lösenordet måste vara minst 8 tecken långt samt innehålla minst en stor bokstav, en siffra och ett specialtecken</p>
+          <p className={`${style.inputInfo}`}>Lösenordet måste vara minst 8 tecken långt samt innehålla minst en stor bokstav, en siffra och ett specialtecken</p>
         )
       }
     }
@@ -138,7 +135,10 @@ const UpdateForm = ({ user }) => {
 
   return ( 
       <div>
-        <h4 className={style.formTitle}>Uppdatera dina uppgifter</h4>
+        <div className={style.editTitleRow}>
+          <h4 className={style.formTitle}>Uppdatera dina uppgifter</h4>
+          <i className={`fas fa-times ${style.closeEdit}`} onClick={() => setEditUser(false)}></i>
+        </div>
         <hr/>
         <form className={style.registerForm} onSubmit={handleSubmit}>
 
@@ -193,6 +193,8 @@ const UpdateForm = ({ user }) => {
               </div>
             </div>
           </div>
+
+          { emailExists && <p className={style.inputInfo}>Den adressen finns redan registrerad</p> }
  
           <div className={style.inputRow}>
             <div className={style.inputItem}>
@@ -237,4 +239,4 @@ const UpdateForm = ({ user }) => {
    );
 }
  
-export default UpdateForm;
+export default EditForm;

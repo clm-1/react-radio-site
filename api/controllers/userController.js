@@ -97,21 +97,45 @@ const register = (req, res) => {
         $password: req.body.password,
       };
 
-    console.log(req.body);
-    db.run(query, params, function (err) {
-      if (err) {
-        console.log('there was an error')
+      console.log(req.body);
+      db.run(query, params, function (err) {
+        if (err) {
+        console.log('There was an error')
         console.log(err);
-      }
+        }
       
-      res.json({ success: 'User was registered', lastID: this.lastID });
-    });
+        res.json({ success: 'User was registered', lastID: this.lastID });
+      });
     }
   })
 }
 
-const updateUserInfo = (req, res) => {
+const editUserInfo = (req, res) => {
+  let query = `SELECT * FROM users WHERE email = $email`;
+  let params = { $email: req.body.email };
 
+  db.get(query, params, (err, emailUsed) => {
+    if (emailUsed && emailUsed.email !== req.session.user.email) {
+      res.status(400).json({ emailExists: 'A user with that email address already exits' });
+    } else {
+      req.body.password = encrypt.encrypt(req.body.password);
+      query = `UPDATE users SET firstName = $firstName, lastName = $lastName, email = $email, password = $password WHERE userId = $userId`;
+      params = {
+        $firstName: req.body.firstName,
+        $lastName: req.body.lastName,
+        $email: req.body.email,
+        $password: req.body.password,
+        $userId: req.session.user.userId
+      }
+      db.run(query, params, function (err) {
+        if (err) {
+          res.json({ error: 'There was an error'});
+        } else {
+          res.json({ success: 'User info was edited'});
+        }
+      });
+    }
+  })
 }
 
 const removeFavourite = (req, res) => {
@@ -175,5 +199,5 @@ module.exports = {
   logout,
   addFavourite,
   removeFavourite,
-  updateUserInfo,
+  editUserInfo,
 }

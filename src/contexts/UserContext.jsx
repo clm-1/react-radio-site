@@ -6,6 +6,7 @@ export const UserContext = createContext();
 const UserDataProvider = (props) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
+  const [editUser, setEditUser] = useState(false);
   const history = useHistory();
 
   const whoami = async () => {
@@ -79,6 +80,18 @@ const UserDataProvider = (props) => {
     return result;
   }
 
+  const editUserInfo = async (editedInfo) => {
+    let result = await fetch(`/api/v1/users/${loggedInUser.userId}/edit`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(editedInfo),
+    });
+    result = await result.json();
+    return result;
+  }
+
   const removeFavourite = async (showId, type) => {
     if (loggedInUser) {
       let result = await fetch(`/api/v1/users/${loggedInUser.userId}/removefavourite?showId=${showId}&type=${type}`, {
@@ -127,6 +140,9 @@ const UserDataProvider = (props) => {
     userFavourites,
     addFavourite,
     removeFavourite,
+    editUserInfo,
+    editUser,
+    setEditUser,
   }
 
   return ( 

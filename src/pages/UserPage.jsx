@@ -1,13 +1,14 @@
 import { useContext, useState } from 'react';
 import ChannelCardSmall from '../components/ChannelCardSmall';
 import ProgramCard from '../components/ProgramCard';
-import UpdateForm from '../components/UpdateForm';
+import EditForm from '../components/EditForm';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
 
 const UserPage = () => {
-  const { loggedInUser, userFavourites, logout } = useContext(UserContext);
+  const { loggedInUser, userFavourites, logout, editUser, setEditUser } = useContext(UserContext);
   const [tab, setTab] = useState('channels');
+ 
 
   let welcomeMessage = 'Inte inloggad';
   if (loggedInUser) {
@@ -18,7 +19,7 @@ const UserPage = () => {
           {/* <span>{ loggedInUser.email }</span> */}
         </div>
         <div className={style.userBtns}>
-          <div>Ändra uppgifter</div>
+          <div onClick={() => setEditUser(true)}>Ändra uppgifter</div>
           <div onClick={() => logout()}>Logga ut</div>
         </div>
       </div>
@@ -54,7 +55,7 @@ const UserPage = () => {
     <div>
       { welcomeMessage }
       <div>
-        <UpdateForm user={loggedInUser} />
+        { editUser && <EditForm user={loggedInUser} /> }
       </div>
       <h4 className={style.favouritesTitle}>Dina favoriter</h4>
       <div className={style.tabLinks}>

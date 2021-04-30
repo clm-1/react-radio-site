@@ -67,10 +67,9 @@
 
 .formTitle {
   margin-bottom: .5rem;
-  margin-top: 1rem;
 }
 
-.passwordInfo {
+.inputInfo {
   margin-top: .4rem;
   font-size: .8rem;
   font-style: italic;
@@ -103,4 +102,19 @@
 
 .btnRow button {
   width: 50%;
+}
+
+.editTitleRow {
+  cursor: pointer;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .2rem 0 .1rem;
+}
+
+.closeEdit {
+  position: relative;
+  color: #333;
+  font-size: 1.35rem;
 }
