@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
+import ScrollOnLoad from './components/ScrollOnLoad';
 import RadioDataProvider from './contexts/RadioDataContext';
 import UserDataProvider from './contexts/UserContext';
 import ChannelDetails from './pages/ChannelDetails';
@@ -14,6 +17,7 @@ function App() {
         <Router>
           <RadioDataProvider>
             <UserDataProvider>
+              <ScrollOnLoad />
               <Navbar />
               <div className="site-container">
                 <Route exact path='/' component={Home} />
@@ -22,6 +26,8 @@ function App() {
                 <Route exact path='/user' component={UserPage} />
                 <Route exact path='/login' component={LoginOrRegister} />
               </div>
+              <ScrollToTop />
+              <Footer />
             </UserDataProvider>
           </RadioDataProvider>
         </Router>
