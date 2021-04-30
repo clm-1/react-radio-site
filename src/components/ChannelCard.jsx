@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import style from '../css/ChannelCard.module.css';
 
-const ShowCard = ({ channel }) => {
+const ChannelCard = ({ channel }) => {
   const history = useHistory();
 
   return ( 
@@ -12,4 +12,4 @@ const ShowCard = ({ channel }) => {
    );
 }
  
-export default ShowCard;
+export default ChannelCard;
