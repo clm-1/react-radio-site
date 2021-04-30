@@ -10,6 +10,7 @@ const RadioDataProvider = (props) => {
   const [categoryPrograms, setCategoryPrograms] = useState(null);
   const [programs, setPrograms] = useState(null);
   const [popularChannels, setPopularChannels] = useState(null);
+  const [inFocus, setInFocus] = useState(null);
   const [popularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
   const [tab, setTab] = useState('popular');
 
@@ -53,6 +54,7 @@ const RadioDataProvider = (props) => {
   const getAllProgramsByChannel = async (channelId) => {
     let programs = await fetch(`/api/v1/channels/${channelId}/programs`);
     programs = await programs.json();
+    programs.programs.sort((a, b) => (a.name > b.name) ? 1 : -1);
     setPrograms(programs.programs);
   }
 
@@ -70,9 +72,15 @@ const RadioDataProvider = (props) => {
     setCategoryPrograms(categoryPrograms.programs);
   }
 
+  const setFocus = async () => {
+    let focusItem = await getProgramById(412);
+    setInFocus(focusItem);
+  }
+
   useEffect(() => {
     getAllChannels();
     getAllCategories();
+    setFocus();
     // eslint-disable-next-line
   }, []);
   
@@ -95,6 +103,7 @@ const RadioDataProvider = (props) => {
     tab,
     setTab,
     getProgramById,
+    inFocus
   };
 
   return (

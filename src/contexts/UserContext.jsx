@@ -21,6 +21,7 @@ const UserDataProvider = (props) => {
    
     let channels = result.filter(item => item.type === 'channel');
     let programs = result.filter(item => item.type === 'program');
+    console.log('favourite channels:', channels );
     let fetchedChannels = [];
     let fetchedPrograms = [];
     for (let i = 0; i < channels.length; i++) {

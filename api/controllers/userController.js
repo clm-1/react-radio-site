@@ -69,7 +69,9 @@ const getFavouritesByUserId = (req, res) => {
     return;
   }
 
-  let query = `SELECT * FROM favourites WHERE userIdFav = $userId`;
+  let query = `
+    SELECT * FROM favourites WHERE userIdFav = $userId
+    ORDER BY timeAdded`;
   let params = { $userId: req.params.userId };
   db.all(query, params, (err, fav) => {
     res.json(fav);
@@ -171,12 +173,13 @@ const removeFavourite = (req, res) => {
 const addFavourite = (req, res) => {
   if (!req.session.user) return;
   let query = `
-    INSERT INTO favourites (userIdFav, showId, type)
-    VALUES ($userIdFav, $showId, $type)`;
+    INSERT INTO favourites (userIdFav, showId, type, timeAdded)
+    VALUES ($userIdFav, $showId, $type, $timeAdded)`;
   params = {
     $userIdFav: req.params.userId,
     $showId: req.body.showId,
     $type: req.body.type,
+    $timeAdded: Date.now(),
   }
   db.run(query, params, function (err) {
     if (err) {
@@ -187,7 +190,8 @@ const addFavourite = (req, res) => {
                  item: {
                    userIdFav: req.params.userId,
                    showId: req.body.showId,
-                   type: req.body.type
+                   type: req.body.type,
+                   timeAdded: params.$timeAdded,
                  } });
     }
   })

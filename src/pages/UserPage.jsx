@@ -34,10 +34,11 @@ const UserPage = () => {
 
   let channelList = 'Laddar...';
   if (userFavourites) {
+    let sortedChannels = [...userFavourites.channels].sort((a, b) => (a.channel.name > b.channel.name) ? 1 : -1);
     channelList = 
       <div className={style.listWrapper}>
-        { userFavourites.channels.length === 0 && <p>Du har inte favoritmarkerat några kanaler.</p>}
-        {userFavourites.channels.map(channel => (
+        { sortedChannels.length === 0 && <p>Du har inte favoritmarkerat några kanaler.</p>}
+        {sortedChannels.map(channel => (
           <ChannelCardSmall key={channel.channel.id} channel={channel.channel} />
         ))}
       </div>
@@ -45,10 +46,11 @@ const UserPage = () => {
 
   let programList = 'Laddar...';
   if (userFavourites) {
+    let sortedPrograms = [...userFavourites.programs].sort((a, b) => (a.program.name > b.program.name) ? 1 : -1);
     programList = 
       <div className={style.listWrapper}>
-        { userFavourites.programs.length === 0 && <p>Du har inte favoritmarkerat några program.</p>}
-        {userFavourites.programs.map(program => (
+        { sortedPrograms.length === 0 && <p>Du har inte favoritmarkerat några program.</p>}
+        {sortedPrograms.map(program => (
           <ProgramCard key={program.program.id} program={program.program} />
         ))}
       </div>
@@ -85,6 +87,7 @@ const UserPage = () => {
         <h5 onClick={() => setTab('programs')} className={`${tab !== 'programs' && style.notActive}`}>Program</h5>
       </div>
       <hr className={style.hrLine}/>
+      <p className={style.favouritesInfo}>Klicka på kanal eller program för mer information</p>
       { tab === 'channels' ? channelList : programList }
     </div>
    );
