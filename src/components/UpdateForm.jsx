@@ -2,10 +2,11 @@ import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UpdateForm.module.css';
 
-const UpdateForm = () => {
+const UpdateForm = ({ user }) => {
   const { register } = useContext(UserContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [prevEmail, setPrevEmail] = useState('');
   const [email, setEmail] = useState('');
   const [emailConfirmation, setEmailConfirmation] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +31,16 @@ const UpdateForm = () => {
   const handleEmailConfirmationChange = (e) => {
     setEmailConfirmation(e.target.value);
   }
+
+  useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName)
+      setLastName(user.lastName)
+      setEmail(user.email)
+      setEmailConfirmation(user.email)
+      setPrevEmail(user.email)
+    }
+  }, [user])
 
   useEffect(() => {
     if (email === emailConfirmation) {
@@ -73,25 +84,26 @@ const UpdateForm = () => {
       }
       return;
     } else {
-      const userToRegister = {
+      const updatedInfo = {
         firstName,
         lastName,
         email,
         password,
+        prevEmail,
       }
-      console.log(userToRegister);
-      let result = await register(userToRegister);
-      if (result.success) {
-        console.log(result.success);
-      } else {
-        console.log(result.error);
-      }
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setEmailConfirmation('');
-      setPassword('');
-      setPasswordConfirmation('');
+      console.log(updatedInfo);
+      // let result = await register(updatedInfo);
+      // if (result.success) {
+      //   console.log(result.success);
+      // } else {
+      //   console.log(result.error);
+      // }
+      // setFirstName('');
+      // setLastName('');
+      // setEmail('');
+      // setEmailConfirmation('');
+      // setPassword('');
+      // setPasswordConfirmation('');
     }
   }
 

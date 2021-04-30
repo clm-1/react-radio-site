@@ -54,7 +54,7 @@ const UserPage = () => {
     <div>
       { welcomeMessage }
       <div>
-        <UpdateForm />
+        <UpdateForm user={loggedInUser} />
       </div>
       <h4 className={style.favouritesTitle}>Dina favoriter</h4>
       <div className={style.tabLinks}>

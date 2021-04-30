@@ -110,6 +110,10 @@ const register = (req, res) => {
   })
 }
 
+const updateUserInfo = (req, res) => {
+
+}
+
 const removeFavourite = (req, res) => {
   if (req.session.user) {
     if (req.session.user.userId != req.params.userId) {
@@ -171,4 +175,5 @@ module.exports = {
   logout,
   addFavourite,
   removeFavourite,
+  updateUserInfo,
 }
