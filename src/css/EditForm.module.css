@@ -106,7 +106,7 @@
 
 .editTitleRow {
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -115,6 +115,6 @@
 
 .closeEdit {
   position: relative;
-  color: #333;
+  color: #444;
   font-size: 1.35rem;
 }

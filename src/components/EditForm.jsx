@@ -53,11 +53,7 @@ const EditForm = ({ user }) => {
   }, [email, emailConfirmation]);
 
   useEffect(() => {
-    if (password === passwordConfirmation && password.match(pattern)) {
-      setPasswordCheck(true);
-    } else {
-      setPasswordCheck(false);
-    }
+    if (password === passwordConfirmation && password.match(pattern)) { setPasswordCheck(true); } else { setPasswordCheck(false); }
     // eslint-disable-next-line
   }, [password, passwordConfirmation]);
 
@@ -75,13 +71,6 @@ const EditForm = ({ user }) => {
       return;
     }
     if (email !== emailConfirmation || password !== passwordConfirmation) {
-      // console.log('Blev strul!')
-      // if (email !== emailConfirmation) {
-      //   console.log('Epost-fälten stämmer inte överens');
-      // }
-      // if (password !== passwordConfirmation) {
-      //   console.log('Lösenorden stämmer inte')
-      // }
       return;
     } else {
       const editedInfo = {
@@ -101,6 +90,7 @@ const EditForm = ({ user }) => {
       }
       setPassword('');
       setPasswordConfirmation('');
+      setEditUser(false);
     }
   }
 
@@ -116,10 +106,8 @@ const EditForm = ({ user }) => {
       check = passwordCheck;
     }
     if (input1 || input2) {
-      if (check) 
-        return <i className={`fas fa-check ${style.match}`}></i>;
-      if (!check) 
-        return <i className={`fas fa-times ${style.noMatch}`}></i>;
+      if (check) return <i className={`fas fa-check ${style.match}`}></i>;
+      if (!check) return <i className={`fas fa-times ${style.noMatch}`}></i>;
     }
   }
 
@@ -228,9 +216,7 @@ const EditForm = ({ user }) => {
           </div>
           
          <div className={style.btnRow}>
-            <div>
-            { renderPasswordInfo() }
-            </div>
+            <div> { renderPasswordInfo() } </div>
             <button className={style.registerBtn}>Uppdatera</button>
          </div>
       

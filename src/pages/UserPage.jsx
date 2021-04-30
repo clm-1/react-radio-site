@@ -13,14 +13,17 @@ const UserPage = () => {
   let welcomeMessage = 'Inte inloggad';
   if (loggedInUser) {
     welcomeMessage = 
-      <div className={style.userHeader}>
-        <div className={style.userInfo}>
+      <div className={style.userInfo}>
+        <div className={style.userBox}>
+          <p className={style.loggedInAs}>Inloggad som:</p>
+          <hr/>
           <h3 className={style.fullName}>{ loggedInUser.firstName } { loggedInUser.lastName }</h3>
-          {/* <span>{ loggedInUser.email }</span> */}
-        </div>
-        <div className={style.userBtns}>
-          <div onClick={() => setEditUser(true)}>Ändra uppgifter</div>
-          <div onClick={() => logout()}>Logga ut</div>
+          <p className={style.email}>{ loggedInUser.email }</p>
+          <hr/>
+          <div className={style.userBtns}>
+            <button onClick={() => setEditUser(true)}>Ändra uppgifter</button>
+            <button onClick={() => logout()}>Logga ut</button>
+          </div>
         </div>
       </div>
   }
@@ -51,9 +54,28 @@ const UserPage = () => {
       </div>
   }
 
+  const renderNoFavourites = (type) => {
+    return (
+      <div className={style.noFavouritesCard}>
+        <p className={style.noFavMessage}>Inga { type } i din lista än...</p>
+      </div>
+    )
+  }
+
+
   return ( 
     <div>
-      { welcomeMessage }
+      <div className={style.userHeader}>
+        { welcomeMessage }
+        { userFavourites && 
+          <div className={style.latestAdded}>
+            <h4 className={style.latestAddedTitle}>Din senaste favorit-kanal:</h4>
+            { userFavourites.channels.length ? <ChannelCardSmall channel={userFavourites.channels[userFavourites.channels.length - 1].channel}/> : renderNoFavourites('kanaler') }
+            <h4 className={`${style.latestAddedTitle} ${style.middleTitle}`}>Ditt senaste favorit-program:</h4>
+            { userFavourites.programs.length ? <ProgramCard program={userFavourites.programs[userFavourites.programs.length - 1].program}/> : renderNoFavourites('program')}
+        </div>
+        }
+      </div>
       <div>
         { editUser && <EditForm user={loggedInUser} /> }
       </div>

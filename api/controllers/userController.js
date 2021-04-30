@@ -2,9 +2,7 @@ const encrypt = require('../Encrypt');
 const sqlite3 = require('sqlite3');
 const path = require('path');
 
-const db = new sqlite3.Database(path.join(__dirname, '../radioSiteDb.db'));
-
-console.log('test encrypt:', encrypt.encrypt('guybrush'))
+const db = new sqlite3.Database(path.join(__dirname, '../../database/radioSiteDb.db'));
 
 const whoami = (req, res) => {
   res.json(req.session.user || null);
@@ -39,12 +37,12 @@ const logout = (req, res) => {
   res.json({ success: 'Logout successful' });
 };
 
-const getAllUsers = (req, res) => {
-  let query = `SELECT * FROM users`;
-  db.all(query, (err, users) => {
-    res.json(users);
-  })
-}
+// const getAllUsers = (req, res) => {
+//   let query = `SELECT * FROM users`;
+//   db.all(query, (err, users) => {
+//     res.json(users);
+//   })
+// }
 
 const getUserById = (req, res) => {
   if (!req.session.user) {
@@ -131,6 +129,12 @@ const editUserInfo = (req, res) => {
         if (err) {
           res.json({ error: 'There was an error'});
         } else {
+          req.session.user = {
+            userId: req.session.user.userId,
+            email: params.$email,
+            firstName: params.$firstName,
+            lastName: params.$lastName,
+          }
           res.json({ success: 'User info was edited'});
         }
       });
@@ -190,7 +194,7 @@ const addFavourite = (req, res) => {
 }
 
 module.exports = {
-  getAllUsers,
+  // getAllUsers,
   getUserById,
   getFavouritesByUserId,
   register,

@@ -36,7 +36,7 @@ const ChannelCardSmall = ({ channel }) => {
   }
 
   return ( 
-    <div className={style.programCard} onClick={() => history.push(`/programs/${channel.id}`)}> 
+    <div className={style.programCard} onClick={() => history.push(`/channels/${channel.id}`)}> 
       <div className={style.imgWrapper}>
         <img src={channel.image} alt=""/>
       </div>
@@ -46,7 +46,7 @@ const ChannelCardSmall = ({ channel }) => {
           { loggedInUser && renderHeart() }
         </div>
         <p className={style.description}>{ channel.channeltype }</p>
-        <span className={style.broadcastInfo}>{ channel.tagline && channel.tagline }</span>
+        <span className={style.broadcastInfo}>{ channel.tagline && channel.tagline.slice(0, 70) }...</span>
       </div>
     </div>
    );

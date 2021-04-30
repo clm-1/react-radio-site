@@ -89,6 +89,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(editedInfo),
     });
     result = await result.json();
+    whoami();
     return result;
   }
 
