@@ -5,6 +5,11 @@
 
 .programCard {
   width: 33%;
+  cursor: pointer;
+}
+
+.programCard:hover {
+  transform: scale(1.005);
 }
 
 .programCard img {

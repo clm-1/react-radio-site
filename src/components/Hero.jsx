@@ -1,23 +1,21 @@
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { RadioDataContext } from '../contexts/RadioDataContext';
 import style from '../css/Hero.module.css';
 
 const Hero = () => {
   const { inFocus } = useContext(RadioDataContext);
-  console.log(inFocus)
+  const history = useHistory();
+
   return ( 
     <div className={style.heroWrapper}>
       { inFocus &&
         <div className={style.cardsWrapper}>
-          <div className={style.programCard}>
-            <img src={inFocus.programimage} alt=""/>
-          </div>
-          <div className={style.programCard}>
-            <img src={inFocus.programimage} alt=""/>
-          </div>
-          <div className={style.programCard}>
-            <img src={inFocus.programimage} alt=""/>
-          </div>
+          { inFocus.map(item => (
+            <div onClick={() => history.push(`/programs/${item.id}`)} key={item.id} className={style.programCard}>
+              <img src={item.programimage} alt={item.name}/>
+            </div>
+          ))}
         </div>
       }
     </div>

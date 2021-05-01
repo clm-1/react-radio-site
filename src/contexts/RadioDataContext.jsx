@@ -73,8 +73,12 @@ const RadioDataProvider = (props) => {
   }
 
   const setFocus = async () => {
-    let focusItem = await getProgramById(412);
-    setInFocus(focusItem);
+    let focusProgramsIds = [1646, 412, 5177];
+    let focusPrograms = [];
+    for (let i = 0; i < focusProgramsIds.length; i++) {
+      focusPrograms.push(await getProgramById(focusProgramsIds[i]));
+    }
+    setInFocus(focusPrograms);
   }
 
   useEffect(() => {
