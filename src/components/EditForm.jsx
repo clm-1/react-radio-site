@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import style from '../css/EditForm.module.css';
 
 const EditForm = ({ user }) => {
-  const { editUserInfo, setEditUser } = useContext(UserContext);
+  const { editUserInfo, setEditUser, setHideLatest } = useContext(UserContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -118,11 +118,16 @@ const EditForm = ({ user }) => {
     }
   }
 
+  const handleCloseBtn = () => {
+    setEditUser(false);
+    setHideLatest(false);
+  }
+
   return ( 
       <div>
         <div className={style.editTitleRow}>
           <h4 className={style.formTitle}>Uppdatera dina uppgifter</h4>
-          <i className={`fas fa-times ${style.closeEdit}`} onClick={() => setEditUser(false)}></i>
+          <i className={`fas fa-times ${style.closeEdit}`} onClick={() => handleCloseBtn()}></i>
         </div>
         <hr/>
         <form className={style.registerForm} onSubmit={handleSubmit}>

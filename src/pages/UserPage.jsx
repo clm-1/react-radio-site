@@ -7,7 +7,7 @@ import style from '../css/UserPage.module.css';
 import { useHistory } from 'react-router-dom';
 
 const UserPage = () => {
-  const { loggedInUser, userFavourites, logout, editUser, setEditUser } = useContext(UserContext);
+  const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest} = useContext(UserContext);
   const history = useHistory()
   const [tab, setTab] = useState('channels');
 
@@ -17,6 +17,11 @@ const UserPage = () => {
     if (!result) {
       history.push('/');
     }
+  }
+
+  const handleEditBtn = () => {
+    setEditUser(!editUser);
+    setHideLatest(!hideLatest);
   }
 
   useEffect(() => {
@@ -39,7 +44,7 @@ const UserPage = () => {
           <p className={style.email}>{ loggedInUser.email }</p>
           <hr/>
           <div className={style.userBtns}>
-            <button onClick={() => setEditUser(!editUser)}>Ändra uppgifter</button>
+            <button onClick={() => handleEditBtn()}>Ändra uppgifter</button>
             <button onClick={() => logout()}>Logga ut</button>
           </div>
         </div>
@@ -84,7 +89,7 @@ const UserPage = () => {
       <div className={style.userHeader}>
         { welcomeMessage }
         { userFavourites && 
-          <div className={style.latestAdded}>
+          <div className={`${style.latestAdded} ${hideLatest && style.hideLatest}`}>
             <h4 className={style.latestAddedTitle}>Din senaste favorit-kanal:</h4>
             { userFavourites.channels.length ? <ChannelCardSmall channel={userFavourites.channels[userFavourites.channels.length - 1].channel}/> : renderNoFavourites('kanaler') }
             <h4 className={`${style.latestAddedTitle} ${style.middleTitle}`}>Ditt senaste favorit-program:</h4>

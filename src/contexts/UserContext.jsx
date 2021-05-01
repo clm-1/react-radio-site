@@ -7,6 +7,7 @@ const UserDataProvider = (props) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
   const [editUser, setEditUser] = useState(false);
+  const [hideLatest, setHideLatest] = useState(false);
   const history = useHistory();
 
   const whoami = async () => {
@@ -136,6 +137,8 @@ const UserDataProvider = (props) => {
     editUserInfo,
     editUser,
     setEditUser,
+    hideLatest,
+    setHideLatest,
   }
 
   return ( 
