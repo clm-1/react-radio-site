@@ -21,7 +21,7 @@ const UserDataProvider = (props) => {
    
     let channels = result.filter(item => item.type === 'channel');
     let programs = result.filter(item => item.type === 'program');
-    console.log('favourite channels:', channels );
+
     let fetchedChannels = [];
     let fetchedPrograms = [];
     for (let i = 0; i < channels.length; i++) {
@@ -68,16 +68,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToRegister)
     });
     result = await result.json();
-    if (result.success) {
-      let userToLogin = {
-        email: userToRegister.email,
-        password: userToRegister.password
-      }
-      let loginResult = await login(userToLogin);
-      if (loginResult.success) {
-        console.log('login successful after registration')
-      }
-    }
+    whoami();
     return result;
   }
 
