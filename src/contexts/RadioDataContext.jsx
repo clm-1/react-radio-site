@@ -105,7 +105,7 @@ const RadioDataProvider = (props) => {
     tab,
     setTab,
     getProgramById,
-    inFocus
+    inFocus,
   };
 
   return (
