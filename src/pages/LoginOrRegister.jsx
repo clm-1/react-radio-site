@@ -1,10 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import LoginForm from "../components/LoginForm"
 import RegisterForm from "../components/RegisterForm"
 import style from '../css/LoginOrRegister.module.css';
 
 const LoginOrRegister = () => {
   const [registerForm, setRegisterForm] = useState(false);
+  const history = useHistory();
+
+  const checkLoggedIn = async () => {
+    let result = await fetch('/api/v1/users/whoami');
+    result = await result.json();
+    if (result) {
+      history.push('/user');
+    }
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+  })
 
   return ( 
     <div className={style.loginRegisterWrapper}>

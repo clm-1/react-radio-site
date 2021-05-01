@@ -21,6 +21,10 @@ const UserPage = () => {
 
   useEffect(() => {
     checkLoggedIn();
+    
+    return () => {
+      setEditUser(false);
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -35,7 +39,7 @@ const UserPage = () => {
           <p className={style.email}>{ loggedInUser.email }</p>
           <hr/>
           <div className={style.userBtns}>
-            <button onClick={() => setEditUser(true)}>Ändra uppgifter</button>
+            <button onClick={() => setEditUser(!editUser)}>Ändra uppgifter</button>
             <button onClick={() => logout()}>Logga ut</button>
           </div>
         </div>
