@@ -28,7 +28,7 @@ const CategoryProgramList = () => {
       <div>
         <div className={style.categoryTitleRow}>
           <span onClick={() => setTab('categories')}>{'<'}</span>
-          <h4>{ title }</h4>
+          <h4 className={style.categoryTitle}>{ title }</h4>
         </div>
         <div className={style.categoryProgramList}>
           { content }

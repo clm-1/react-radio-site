@@ -62,7 +62,7 @@ span.broadcastInfo {
 
 @media screen and (min-width: 400px) {
   .description {
-    font-size: .83rem;
+    font-size: .7rem;
     font-style: normal;
   }
 
@@ -92,7 +92,7 @@ span.broadcastInfo {
   }
 
   .description {
-    font-size: .9rem;
+    font-size: .8rem;
     margin-bottom: .3rem;
   }
 

@@ -140,6 +140,7 @@
 
   .broadcastInfo {
     margin-top: .3rem;
+    margin-bottom: .5rem;
     font-size: .92rem;
   }
 }
@@ -150,7 +151,7 @@
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .title {
@@ -161,5 +162,9 @@
 
   .titleRow i {
     font-size: 1.9rem;
+  }
+
+  .broadcastInfo {
+    font-size: 1.1rem;
   }
 }
