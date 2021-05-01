@@ -26,8 +26,8 @@ const LoginOrRegister = () => {
         <h2 className={style.welcome}>Välkommen!</h2>
         <h4 className={style.shortText}>Lorem ipsum dolor sit amet consectetur.</h4>
         <hr/>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, dolorum! Asperiores omnis saepe, maxime reiciendis minima perferendis aliquam quos praesentium facilis ad numquam animi facere itaque officia sapiente. Nam facilis qui repudiandae sequi delectus deleniti quaerat beatae aperiam illum eum iusto labore repellat vitae, sunt at ex facere quo officia.</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, ad. Aliquid dolorem eos voluptate dolor porro a. Sit, repellat similique.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, dolorum! Asperiores omnis saepe, maxime reiciendis minima perferendis aliquam quos praesentium facilis ad numquam animi facere itaque officia sapient.</p>
+        <p className={style.hidePtag}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, ad. Aliquid dolorem eos voluptate dolor porro a. Sit, repellat similique.</p>
         <br/>
         <h5 className={style.sectionTitle}>Detta kan du göra med ett konto:</h5>
         <ul>

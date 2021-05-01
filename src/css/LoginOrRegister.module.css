@@ -1,13 +1,13 @@
 .loginRegisterWrapper {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   margin: 0 auto;
-  gap: 1rem;
 }
 
 .infoColumn {
-  width: 50%;
+  width: 100%;
   margin-right: 1.5rem;
   background-color: rgb(246, 246, 248);
   padding: 1.2rem;
@@ -17,11 +17,12 @@
 .shortText {
   margin-bottom: .7rem;
   font-weight: 400;
+  font-size: .85rem;
   font-style: italic;
 }
 
 .infoColumn p {
-  font-size: .93rem;
+  font-size: .76rem;
   margin-top: .7rem;
 }
 
@@ -32,22 +33,81 @@
 
 .infoColumn li {
   margin: .1rem 0;
-  font-size: .9rem;
-  margin-left: 1.5rem;
+  font-size: .75rem;
+  margin-left: 1rem;
 }
 
 .sectionTitle {
-  font-size: .9rem;
-  margin-top: 1rem;
+  font-size: .8rem;
 }
 
 .formColumn {
-  width: 50%;
+  width: 100%;
   min-height: 700px;
+}
+
+.hidePtag {
+  display: none;
 }
 
 .infoTextBottom {
   cursor: pointer;
   text-align: center;
   color: rgb(21, 78, 133);
+}
+
+@media screen and (min-width: 630px) {
+ .loginRegisterWrapper {
+   flex-direction: row;
+ }
+
+ .infoColumn {
+  width: 40%;
+ }
+
+ .formColumn {
+   width: 60%;
+ }
+}
+
+@media screen and (min-width: 670px) {
+  .loginRegisterWrapper {
+    gap: 1rem;
+  }
+
+  .infoColumn li {
+    margin: .1rem 0;
+    font-size: .9rem;
+    margin-left: 1.5rem;
+  }
+
+  .infoColumn p {
+    margin-bottom: .5rem;
+  }
+
+  .hidePtag {
+    display: initial;
+  }
+
+  .shortText {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    margin-top: 1rem;
+  }
+
+  .formColumn {
+    width: 50%;
+    min-height: 700px;
+  }
+  
+  .infoColumn {
+    width: 50%;
+  }
+
+  .infoColumn p {
+    font-size: .93rem;
+    margin-top: .7rem;
+  }
 }
