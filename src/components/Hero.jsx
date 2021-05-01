@@ -11,8 +11,8 @@ const Hero = () => {
     <div className={style.heroWrapper}>
       { inFocus &&
         <div className={style.cardsWrapper}>
-          { inFocus.map(item => (
-            <div onClick={() => history.push(`/programs/${item.id}`)} key={item.id} className={style.programCard}>
+          { inFocus.map((item, index) => (
+            <div onClick={() => history.push(`/programs/${item.id}`)} key={item.id} className={`${style.programCard} ${index === 2 && style.hideOnSmall}`}>
               <img src={item.programimage} alt={item.name}/>
             </div>
           ))}

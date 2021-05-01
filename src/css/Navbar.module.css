@@ -25,6 +25,7 @@
 }
 
 .navName {
+  display: none;
   opacity: .8;
   font-weight: 300;
   font-size: .9rem;
@@ -70,4 +71,10 @@ a.activeLink {
 .registerBtn:active {
   outline: none;
   transform: scale(1.005);
+}
+
+@media screen and (min-width: 700px) {
+  .navName {
+    display: initial;
+  }
 }

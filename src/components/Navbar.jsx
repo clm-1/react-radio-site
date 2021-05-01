@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className={style.navbarWrapper}>
         <nav>
           <div className={style.logo} onClick={() => logoClick()}>
-            RADIOsidan
+            RADIO
           </div>
           <div className={style.linkWrapper}>
             <NavLink exact to="/" activeClassName={style.activeLink}>Kanaler {`&`} Program</NavLink>
@@ -29,7 +29,6 @@ const Navbar = () => {
             { loggedInUser ? 
               <button className={style.registerBtn} onClick={() => history.push('/user')}>Mina sidor</button> :
               <button className={style.registerBtn} onClick={() => history.push('/login')}>Logga in</button>}
-            {/* <button onClick={() => logout()}>Logga ut</button> */}
           </div>
       </nav>
     </div>

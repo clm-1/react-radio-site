@@ -22,7 +22,7 @@
 .listWrapper {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: .5rem;
 }
 
@@ -82,4 +82,10 @@
 
 .scheduleTitle label {
   font-size: .9rem;
+}
+
+@media screen and (min-width: 980px) {
+  .listWrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

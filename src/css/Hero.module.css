@@ -4,7 +4,7 @@
 }
 
 .programCard {
-  width: 33%;
+  width: 50%;
   cursor: pointer;
 }
 
@@ -16,7 +16,21 @@
   width: 100%;
 }
 
+.hideOnSmall {
+  display: none;
+}
+
 .cardsWrapper {
   display: flex;
   gap: .5rem;
+}
+
+@media screen and (min-width: 670px) {
+  .hideOnSmall {
+    display: initial;
+  }
+
+  .programCard {
+    width: 33%;
+  }
 }

@@ -1,6 +1,6 @@
 .categoryProgramList {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: .5rem;
 }
 
@@ -22,4 +22,14 @@
   font-size: 1.3rem;
   position: relative;
   top: -1px;
+}
+
+@media screen and (min-width: 400px) {
+  
+}
+
+@media screen and (min-width: 980px) {
+  .categoryProgramList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
