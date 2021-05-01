@@ -1,8 +1,18 @@
 .episodeCardWrapper {
+  position: relative;
   display: flex;
   background-color: rgb(241, 241, 241);
   margin-bottom: .7rem;
   padding: .5rem 1.2rem .5rem .5rem;
+}
+
+.episodeCardWrapper a {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.2rem;
+  color: rgb(74, 125, 156);
 }
 
 .imgWrapper {
@@ -19,6 +29,11 @@
  object-fit: cover;
 }
 
+.episodeInfo {
+  flex: 1;
+  padding-right: 5rem;
+}
+
 .time {
   font-weight: 300;
 }
@@ -26,4 +41,10 @@
 .desc {
   font-size: .9rem;
   margin-top: .5rem;
+}
+
+.titleRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }

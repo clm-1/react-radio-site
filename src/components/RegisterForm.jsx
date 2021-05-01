@@ -82,7 +82,7 @@ const RegisterForm = () => {
       console.log(userToRegister);
       let result = await register(userToRegister);
       if (result.success) {
-        console.log(result.success);
+        console.log(result.success, result);
       } else {
         console.log(result.error);
       }

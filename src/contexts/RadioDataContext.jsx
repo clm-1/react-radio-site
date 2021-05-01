@@ -18,7 +18,6 @@ const RadioDataProvider = (props) => {
   const getAllChannels = async () => {
     let channels = await fetch('/api/v1/channels');
     channels = await channels.json();
-    console.log(channels.channels);
     setChannels(channels.channels)
 
     let temp = channels.channels.filter(channel => popularChannelsIds.includes(channel.id));
@@ -28,7 +27,6 @@ const RadioDataProvider = (props) => {
   const getAllCategories = async () => {
     let categories = await fetch('/api/v1/categories');
     categories = await categories.json();
-    console.log(categories.programcategories);
     setCategories(categories.programcategories);
   }
 
@@ -73,8 +71,12 @@ const RadioDataProvider = (props) => {
   }
 
   const setFocus = async () => {
-    let focusItem = await getProgramById(412);
-    setInFocus(focusItem);
+    let focusProgramsIds = [1646, 407, 5177];
+    let focusPrograms = [];
+    for (let i = 0; i < focusProgramsIds.length; i++) {
+      focusPrograms.push(await getProgramById(focusProgramsIds[i]));
+    }
+    setInFocus(focusPrograms);
   }
 
   useEffect(() => {
@@ -103,7 +105,7 @@ const RadioDataProvider = (props) => {
     tab,
     setTab,
     getProgramById,
-    inFocus
+    inFocus,
   };
 
   return (

@@ -22,8 +22,8 @@ const ProgramDetails = (props) => {
   }
 
   const getAllEpisodesByProgam = async (programId) => {
-    let toDate = new Date(Date.now()).toISOString().slice(0, 10);
-    let fromDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
+    let toDate = new Date(Date.now() + 24*60*60*1000).toISOString().slice(0, 10)
+    let fromDate = toDate.slice(0, 4) - 2 + toDate.slice(4, 10);
     let dateString = `&fromdate=${fromDate}&todate=${toDate}`;
 
     let episodes;
@@ -33,7 +33,7 @@ const ProgramDetails = (props) => {
 
       if (episodes.episodes.length === 0) {
         toDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
-        fromDate = toDate.slice(0, 4) - 1 + toDate.slice(4, 10);
+        fromDate = toDate.slice(0, 4) - 2 + toDate.slice(4, 10);
         dateString = `&fromdate=${fromDate}&todate=${toDate}`;
         await findEpisodes();
       }
@@ -111,6 +111,8 @@ const ProgramDetails = (props) => {
 
   const renderButton = () => {
     if (allEpisodes && tab === 'all') {
+      console.log('all', allEpisodes);
+      console.log('episodes', episodes);
       if (allEpisodes.length > episodes.length) {
         return <button className={style.showEpisodesBtn} onClick={() => buttonClick()}>Visa alla avsnitt</button>;
       }

@@ -97,14 +97,19 @@ const register = (req, res) => {
         $password: req.body.password,
       };
 
-      console.log(req.body);
       db.run(query, params, function (err) {
         if (err) {
-        console.log('There was an error')
-        console.log(err);
-        }
-      
-        res.json({ success: 'User was registered', lastID: this.lastID });
+          console.log('error:', err)
+          res.json({ error: err });
+        } else {
+          req.session.user = {
+            userId: this.lastID,
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+          }
+          res.json({ success: 'User was registered', lastID: this.lastID });
+        }   
       });
     }
   })

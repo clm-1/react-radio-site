@@ -7,7 +7,6 @@
 
 .programCard:hover {
   background-color: rgb(240, 240, 243);
-  /* box-shadow: -3px 0px 0 rgba(102, 110, 117, 0.493); */
 }
 
 .programCard .imgWrapper {

@@ -1,14 +1,28 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import ChannelCardSmall from '../components/ChannelCardSmall';
 import ProgramCard from '../components/ProgramCard';
 import EditForm from '../components/EditForm';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
+import { useHistory } from 'react-router-dom';
 
 const UserPage = () => {
   const { loggedInUser, userFavourites, logout, editUser, setEditUser } = useContext(UserContext);
+  const history = useHistory()
   const [tab, setTab] = useState('channels');
- 
+
+  const checkLoggedIn = async () => {
+    let result = await fetch('/api/v1/users/whoami');
+    result = await result.json();
+    if (!result) {
+      history.push('/');
+    }
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+    // eslint-disable-next-line
+  }, []);
 
   let welcomeMessage = 'Inte inloggad';
   if (loggedInUser) {
@@ -26,10 +40,6 @@ const UserPage = () => {
           </div>
         </div>
       </div>
-  }
-
-  if (userFavourites) {
-    console.log(userFavourites);
   }
 
   let channelList = 'Laddar...';

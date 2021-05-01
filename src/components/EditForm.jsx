@@ -44,11 +44,8 @@ const EditForm = ({ user }) => {
   }, [user])
 
   useEffect(() => {
-    if (email === emailConfirmation) {
-      setEmailCheck(true);
-    } else {
-      setEmailCheck(false);
-    }
+    if (email === emailConfirmation) 
+    { setEmailCheck(true); } else { setEmailCheck(false); }
     // eslint-disable-next-line
   }, [email, emailConfirmation]);
 
