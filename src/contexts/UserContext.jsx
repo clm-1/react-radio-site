@@ -12,6 +12,7 @@ const UserDataProvider = (props) => {
   const [hideLatest, setHideLatest] = useState(false);
   const history = useHistory();
 
+  // Check if the session has a logged in user
   const whoami = async (method) => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
@@ -29,9 +30,11 @@ const UserDataProvider = (props) => {
     let result = await fetch(`/api/v1/users/${userId}/favourites`);
     result = await result.json();
    
+    // Filter the result from the database, to separate channels and programs
     let channels = result.filter(item => item.type === 'channel');
     let programs = result.filter(item => item.type === 'program');
 
+    // Loop through the arrays to fetch channels and programs from the API
     let fetchedChannels = [];
     let fetchedPrograms = [];
     for (let i = 0; i < channels.length; i++) {
@@ -47,6 +50,7 @@ const UserDataProvider = (props) => {
     setUserFavourites({ channels: fetchedChannels, programs: fetchedPrograms });
   }
 
+  // Login and set logged in user
   const login = async (userToLogin) => {
     let result = await fetch('/api/v1/users/login', {
       method: 'POST',
@@ -161,6 +165,7 @@ const UserDataProvider = (props) => {
     // eslint-disable-next-line
   }, [])
 
+  // Get favourites for the logged in user
   useEffect(() => {
     loggedInUser && getFavouritesByUserId(loggedInUser.userId);
   }, [loggedInUser]);

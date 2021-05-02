@@ -20,6 +20,7 @@ const RadioDataProvider = (props) => {
     channels = await channels.json();
     setChannels(channels.channels)
 
+    // Pick out a couple of channels to be displayed first in the "popular"-tab on the home page
     let temp = channels.channels.filter(channel => popularChannelsIds.includes(channel.id));
     setPopularChannels(temp);
   }
@@ -69,6 +70,7 @@ const RadioDataProvider = (props) => {
     setCategoryPrograms(categoryPrograms.programs);
   }
 
+  // Sets the featured programs on the home page based on id:s
   const setFocus = async () => {
     let focusProgramsIds = [1646, 407, 5177];
     let focusPrograms = [];

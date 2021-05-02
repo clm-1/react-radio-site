@@ -7,6 +7,7 @@ const Hero = () => {
   const { inFocus } = useContext(RadioDataContext);
   const history = useHistory();
 
+  // Loops out the 3 hard coded "featured items" from context
   return ( 
     <div className={style.heroWrapper}>
       { inFocus &&

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import style from '../css/ScrollToTop.module.css';
 
+// Scroll to top-button that appears in lower right corner of screen
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
   let ref = useRef(false);
@@ -13,6 +14,7 @@ const ScrollToTop = () => {
     }
   }, []);
 
+  // Show/hide button depending on how far you've scrolled
   const toggleButton = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 350) {
@@ -23,7 +25,7 @@ const ScrollToTop = () => {
   };
 
   const scrollToTop = () =>{
-    window.scroll({ top:0 ,behavior:'smooth' })
+    window.scroll({ top: 0, behavior: 'smooth' })
   };
 
   window.addEventListener('scroll', toggleButton);
