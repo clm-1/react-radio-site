@@ -104,8 +104,24 @@ const UserDataProvider = (props) => {
         }
       });
       result = await result.json();
-      console.log(result)
-      getFavouritesByUserId(loggedInUser.userId);
+
+      // Filter out the removed item from the userFavourites-array
+      if (result.success) {
+        let newList;
+        if (type === 'program') {
+          newList = {
+            channels: userFavourites.channels,
+            programs: userFavourites.programs.filter(item => item.program.id !== showId),
+          }
+        };
+        if (type === 'channel') {
+          newList = {
+            channels: userFavourites.channels.filter(item => item.channel.id !== showId),
+            programs: userFavourites.programs,
+          }
+        };
+        setUserFavourites(newList);
+      }
     }
   }
 
@@ -137,9 +153,6 @@ const UserDataProvider = (props) => {
         };
         setUserFavourites(newList);
       }
-      console.log(userFavourites);
-      console.log(result);
-      // getFavouritesByUserId(loggedInUser.userId);
     }
   }
 

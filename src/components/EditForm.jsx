@@ -69,8 +69,6 @@ const EditForm = ({ user }) => {
       const editedInfo = { firstName, lastName, email, password }
       let result = await editUserInfo(editedInfo);
       if (result.success) {
-        setPassword('');
-        setPasswordConfirmation('');
         setEditUser(false);
         setHideLatest(false);
       } else if (result.emailExists) {

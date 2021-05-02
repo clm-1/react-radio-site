@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/RegisterForm.module.css';
 
@@ -12,6 +13,7 @@ const RegisterForm = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
+  const history = useHistory();
   
   let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -74,16 +76,11 @@ const RegisterForm = () => {
       console.log(userToRegister);
       let result = await register(userToRegister);
       if (result.success) {
+        history.push('/user');
         console.log(result.success, result);
       } else {
         console.log(result.error);
       }
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setEmailConfirmation('');
-      setPassword('');
-      setPasswordConfirmation('');
     }
   }
 

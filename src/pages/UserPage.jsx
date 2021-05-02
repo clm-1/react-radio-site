@@ -4,26 +4,17 @@ import ProgramCard from '../components/ProgramCard';
 import EditForm from '../components/EditForm';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
-// import { useHistory } from 'react-router-dom';
 
 const UserPage = () => {
   const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest, whoami} = useContext(UserContext);
-  // const history = useHistory()
-  const [tab, setTab] = useState('channels');
-
-  // const checkLoggedIn = async () => {
-  //   let result = await fetch('/api/v1/users/whoami');
-  //   result = await result.json();
-  //   if (!result) {
-  //     history.push('/');
-  //   }
-  // }
+  const [tab, setTab] = useState('programs');
 
   const handleEditBtn = () => {
     setEditUser(!editUser);
     setHideLatest(!hideLatest);
   }
 
+  // Check if user is logged in
   useEffect(() => {
     whoami('check');
     
@@ -102,8 +93,8 @@ const UserPage = () => {
       </div>
       <h4 className={style.favouritesTitle}>Dina favoriter</h4>
       <div className={style.tabLinks}>
-        <h5 onClick={() => setTab('channels')} className={`${tab !== 'channels' && style.notActive}`}>Kanaler</h5>
         <h5 onClick={() => setTab('programs')} className={`${tab !== 'programs' && style.notActive}`}>Program</h5>
+        <h5 onClick={() => setTab('channels')} className={`${tab !== 'channels' && style.notActive}`}>Kanaler</h5>
       </div>
       <hr className={style.hrLine}/>
       <p className={style.favouritesInfo}>Klicka på kanal eller program för mer information</p>
