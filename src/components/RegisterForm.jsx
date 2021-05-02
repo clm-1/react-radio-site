@@ -60,17 +60,15 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!password.match(pattern)) {
-      console.log('kasst lösenord');
       return;
     }
     if (email !== emailConfirmation || password !== passwordConfirmation) {
-      console.log('Blev strul!')
-      if (email !== emailConfirmation) {
-        console.log('Epost-fälten stämmer inte överens');
-      }
-      if (password !== passwordConfirmation) {
-        console.log('Lösenorden stämmer inte')
-      }
+      // if (email !== emailConfirmation) {
+      //   console.log('Epost-fälten stämmer inte överens');
+      // }
+      // if (password !== passwordConfirmation) {
+      //   console.log('Lösenorden stämmer inte')
+      // }
       return;
     } else {
       const userToRegister = {

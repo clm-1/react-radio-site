@@ -88,6 +88,7 @@ const EditForm = ({ user }) => {
       setPassword('');
       setPasswordConfirmation('');
       setEditUser(false);
+      setHideLatest(false);
     }
   }
 
@@ -123,6 +124,10 @@ const EditForm = ({ user }) => {
     setHideLatest(false);
   }
 
+  const nameInputs = [
+    { id: 'first-name', label: 'Förnamn:', type: 'text', value: firstName, function: handleFirstNameChange },
+    { id: 'last-name', label: 'Efternamn:', type: 'text', value: lastName, function: handleLastNameChange }];
+
   return ( 
       <div>
         <div className={style.editTitleRow}>
@@ -133,24 +138,17 @@ const EditForm = ({ user }) => {
         <form className={style.registerForm} onSubmit={handleSubmit}>
 
           <div className={style.inputRow}>
-            <div className={style.inputItem}>
-              <label htmlFor="first-name">Förnamn:</label>
-              <input 
-                id="first-name" 
-                type="text"
-                value={firstName} 
-                onChange={handleFirstNameChange} 
-                required />
-            </div>
-            <div className={style.inputItem}>
-              <label htmlFor="last-name">Efternamn:</label>
-              <input 
-                id="last-name" 
-                type="text"
-                value={lastName} 
-                onChange={handleLastNameChange} 
-                required />
-            </div>
+            { nameInputs.map((input, index) => (
+              <div key={index} className={style.inputItem}>
+                <label htmlFor={input.id}>{ input.label }</label>
+                <input 
+                  id={input.id} 
+                  type={input.type}
+                  value={input.value} 
+                  onChange={input.function} 
+                  required />
+              </div>
+            ))}
           </div>
 
           <div className={style.inputRow}>

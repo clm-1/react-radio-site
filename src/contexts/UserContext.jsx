@@ -10,10 +10,17 @@ const UserDataProvider = (props) => {
   const [hideLatest, setHideLatest] = useState(false);
   const history = useHistory();
 
-  const whoami = async () => {
+  const whoami = async (method) => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
-    setLoggedInUser(result);
+    if (method === 'set') {
+      setLoggedInUser(result);
+      return;
+    }
+    if (method === 'check' && !result) {
+        history.push('/'); 
+        return;
+    }
   }
 
   const getFavouritesByUserId = async (userId) => {
@@ -47,7 +54,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToLogin),
     })
     result = await result.json();
-    whoami();
+    whoami('set');
     return result;
   }
 
@@ -69,7 +76,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToRegister)
     });
     result = await result.json();
-    whoami();
+    whoami('set');
     return result;
   }
 
@@ -82,7 +89,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(editedInfo),
     });
     result = await result.json();
-    whoami();
+    whoami('set');
     return result;
   }
 
@@ -118,7 +125,8 @@ const UserDataProvider = (props) => {
   // useEffect
 
   useEffect(() => {
-    whoami();
+    whoami('set');
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {

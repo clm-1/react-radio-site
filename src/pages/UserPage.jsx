@@ -4,20 +4,20 @@ import ProgramCard from '../components/ProgramCard';
 import EditForm from '../components/EditForm';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const UserPage = () => {
-  const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest} = useContext(UserContext);
-  const history = useHistory()
+  const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest, whoami} = useContext(UserContext);
+  // const history = useHistory()
   const [tab, setTab] = useState('channels');
 
-  const checkLoggedIn = async () => {
-    let result = await fetch('/api/v1/users/whoami');
-    result = await result.json();
-    if (!result) {
-      history.push('/');
-    }
-  }
+  // const checkLoggedIn = async () => {
+  //   let result = await fetch('/api/v1/users/whoami');
+  //   result = await result.json();
+  //   if (!result) {
+  //     history.push('/');
+  //   }
+  // }
 
   const handleEditBtn = () => {
     setEditUser(!editUser);
@@ -25,7 +25,7 @@ const UserPage = () => {
   }
 
   useEffect(() => {
-    checkLoggedIn();
+    whoami('check');
     
     return () => {
       setEditUser(false);
