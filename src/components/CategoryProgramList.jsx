@@ -17,7 +17,6 @@ const CategoryProgramList = () => {
   let title = 'Laddar...'
   if (categoryPrograms) {
     title = categoryPrograms[0].programcategory.name;
-    console.log(categoryPrograms);
     content = categoryPrograms.map(program => (
       <ProgramCard key={program.id} program={program} />
     ))
@@ -28,7 +27,7 @@ const CategoryProgramList = () => {
       <div>
         <div className={style.categoryTitleRow}>
           <span onClick={() => setTab('categories')}>{'<'}</span>
-          <h4>{ title }</h4>
+          <h4 className={style.categoryTitle}>{ title }</h4>
         </div>
         <div className={style.categoryProgramList}>
           { content }

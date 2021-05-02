@@ -60,8 +60,8 @@ const ChannelDetails = (props) => {
   let schedule = 'Laddar...';
   if (channelSchedule) {
     schedule = <div>
-      <div className={style.scheduleTitle}>
-        <h4>{ date }</h4>
+      <div className={style.scheduleDateRow}>
+        <h4 className={style.dateTitle}>{ date }</h4>
         <div>
           <label htmlFor="date">Välj datum:</label>
           <input id="date" type="date" value={ date } onChange={handleDateChange} />

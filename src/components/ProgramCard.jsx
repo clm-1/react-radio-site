@@ -45,8 +45,9 @@ const ProgramCard = ({ program }) => {
           <h4 className={style.title}>{ program.name }</h4>
           { loggedInUser && renderHeart() }
         </div>
+        <hr/>
         <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' } { program.programcategory ? `- ${program.programcategory.name}` : ''}</p>
-        <span className={style.broadcastInfo}>{ program.broadcastinfo && program.broadcastinfo }</span>
+        <span className={style.broadcastInfo}>{ program.broadcastinfo && program.broadcastinfo.slice(0, 110) + '...' }</span>
       </div>
     </div>
    );

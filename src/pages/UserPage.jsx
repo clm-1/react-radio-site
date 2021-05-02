@@ -4,23 +4,32 @@ import ProgramCard from '../components/ProgramCard';
 import EditForm from '../components/EditForm';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/UserPage.module.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const UserPage = () => {
-  const { loggedInUser, userFavourites, logout, editUser, setEditUser } = useContext(UserContext);
-  const history = useHistory()
+  const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest, whoami} = useContext(UserContext);
+  // const history = useHistory()
   const [tab, setTab] = useState('channels');
 
-  const checkLoggedIn = async () => {
-    let result = await fetch('/api/v1/users/whoami');
-    result = await result.json();
-    if (!result) {
-      history.push('/');
-    }
+  // const checkLoggedIn = async () => {
+  //   let result = await fetch('/api/v1/users/whoami');
+  //   result = await result.json();
+  //   if (!result) {
+  //     history.push('/');
+  //   }
+  // }
+
+  const handleEditBtn = () => {
+    setEditUser(!editUser);
+    setHideLatest(!hideLatest);
   }
 
   useEffect(() => {
-    checkLoggedIn();
+    whoami('check');
+    
+    return () => {
+      setEditUser(false);
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -35,7 +44,7 @@ const UserPage = () => {
           <p className={style.email}>{ loggedInUser.email }</p>
           <hr/>
           <div className={style.userBtns}>
-            <button onClick={() => setEditUser(true)}>Ändra uppgifter</button>
+            <button onClick={() => handleEditBtn()}>Ändra uppgifter</button>
             <button onClick={() => logout()}>Logga ut</button>
           </div>
         </div>
@@ -47,7 +56,7 @@ const UserPage = () => {
     let sortedChannels = [...userFavourites.channels].sort((a, b) => (a.channel.name > b.channel.name) ? 1 : -1);
     channelList = 
       <div className={style.listWrapper}>
-        { sortedChannels.length === 0 && <p>Du har inte favoritmarkerat några kanaler.</p>}
+        { sortedChannels.length === 0 && <p className={style.noFavourites}>Du har inte favoritmarkerat några kanaler.</p>}
         {sortedChannels.map(channel => (
           <ChannelCardSmall key={channel.channel.id} channel={channel.channel} />
         ))}
@@ -59,7 +68,7 @@ const UserPage = () => {
     let sortedPrograms = [...userFavourites.programs].sort((a, b) => (a.program.name > b.program.name) ? 1 : -1);
     programList = 
       <div className={style.listWrapper}>
-        { sortedPrograms.length === 0 && <p>Du har inte favoritmarkerat några program.</p>}
+        { sortedPrograms.length === 0 && <p className={style.noFavourites}>Du har inte favoritmarkerat några program.</p>}
         {sortedPrograms.map(program => (
           <ProgramCard key={program.program.id} program={program.program} />
         ))}
@@ -80,7 +89,7 @@ const UserPage = () => {
       <div className={style.userHeader}>
         { welcomeMessage }
         { userFavourites && 
-          <div className={style.latestAdded}>
+          <div className={`${style.latestAdded} ${hideLatest && style.hideLatest}`}>
             <h4 className={style.latestAddedTitle}>Din senaste favorit-kanal:</h4>
             { userFavourites.channels.length ? <ChannelCardSmall channel={userFavourites.channels[userFavourites.channels.length - 1].channel}/> : renderNoFavourites('kanaler') }
             <h4 className={`${style.latestAddedTitle} ${style.middleTitle}`}>Ditt senaste favorit-program:</h4>

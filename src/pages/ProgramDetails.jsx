@@ -40,7 +40,6 @@ const ProgramDetails = (props) => {
     }
     await findEpisodes();
 
-    console.log(episodes.episodes);
     if (ref.current) {
       setEpisodes(episodes.episodes);
     } 
@@ -48,14 +47,12 @@ const ProgramDetails = (props) => {
 
   useEffect(() => {
     ref.current = true;
-    console.log('mounted', ref)
     getProgramById(programId);
     getAllEpisodesByProgam(programId);
     getAllEpisodes();
 
     return () => {
       ref.current = false;
-      console.log('unmounted', ref)
     }
     // eslint-disable-next-line
   }, []);
@@ -65,10 +62,9 @@ const ProgramDetails = (props) => {
     let episodes = await fetch(`/api/v1/episodes/${programId}${dateString}`)
     episodes = await episodes.json();
     if (ref.current) {
-      console.log('mounted: setting state');
       setAllEpisodes(episodes.episodes);
     } else {
-      console.log('unmounted: did not set state')
+      return
     }
   }
 
@@ -111,8 +107,6 @@ const ProgramDetails = (props) => {
 
   const renderButton = () => {
     if (allEpisodes && tab === 'all') {
-      console.log('all', allEpisodes);
-      console.log('episodes', episodes);
       if (allEpisodes.length > episodes.length) {
         return <button className={style.showEpisodesBtn} onClick={() => buttonClick()}>Visa alla avsnitt</button>;
       }

@@ -1,40 +1,86 @@
 .episodeCardWrapper {
   position: relative;
   display: flex;
+  flex-direction: column;
   background-color: rgb(241, 241, 241);
   margin-bottom: .7rem;
-  padding: .5rem 1.2rem .5rem .5rem;
+  padding: .5rem .5rem .5rem .5rem;
+  min-height: 115px;
 }
 
-.episodeCardWrapper a {
-  position: absolute;
+.imgAndInfo {
+  display: flex;
+}
+
+.descDesktop {
+  display: none;
+  font-size: .81rem;
+  margin-top: .3rem;
+}
+
+.bottomBar {
+  background-color: rgb(209, 209, 209);
+  margin-top: .6rem;
+  margin-left: .15rem;
+  text-align: center;
+  padding: .2rem;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.bottomBar:active {
+  transform: scale(1.02);
+}
+
+.title {
+  font-size: .73rem;
+}
+
+.midRow {
+  display: flex;
+}
+
+.playWrapper {
+  margin-top: .5rem;
+}
+
+.playWrapper a {
   right: 25px;
-  top: 50%;
   transform: translateY(-50%);
-  font-size: 2.2rem;
-  color: rgb(74, 125, 156);
+  font-size: .83rem;
+  color: rgb(62, 114, 146);
+}
+
+.playWrapper p {
+  padding: .2rem 0;
 }
 
 .imgWrapper {
- margin-right: 1.2rem;
- height: 100px;
- width: 100px;
+ margin-right: .7rem;
+ height: 75px;
+ width: 75px;
  padding-top: .2rem;
  padding-left: .2rem;
 }
 
 .imgWrapper img {
- height: 100px;
- width: 100px;
+ height: 75px;
+ width: 75px;
  object-fit: cover;
+}
+
+.hideTopPlay {
+  display: none;
 }
 
 .episodeInfo {
   flex: 1;
-  padding-right: 5rem;
 }
 
 .time {
+  font-family: 'Open Sans';
+  margin-top: .2rem;
+  font-size: .83rem;
   font-weight: 300;
 }
 
@@ -47,4 +93,172 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+}
+
+.moreInfo {
+  padding: .6rem .2rem 0 .2rem;
+  font-size: .79rem;
+}
+
+@media screen and (min-width: 430px) {
+  .title {
+    font-size: .85rem;
+  }
+
+  .time {
+    font-style: italic;
+    font-size: .9rem;
+  }
+
+  .imgWrapper {
+    height: 85px;
+    width: 85px;
+  }
+
+  .imgWrapper img {
+    height: 85px;
+    width: 85px;
+  }
+
+  .moreInfo {
+    font-size: .85rem;
+  }
+
+  .playWrapper a {
+    font-size: .88rem;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .title {
+    font-size: .93rem;
+    margin-bottom: .3rem;
+  }
+
+  .time {
+    font-size: .97rem;
+  }
+
+  .imgWrapper {
+    height: 95px;
+    width: 95px;
+  }
+
+  .imgWrapper img {
+    height: 95px;
+    width: 95px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .title {
+    font-size: 1rem;
+  }
+
+  .imgWrapper {
+    height: 85px;
+    width: 85px;
+  }
+
+  .imgWrapper img {
+    height: 85px;
+    width: 85px;
+  }
+}
+
+@media screen and (min-width: 740px) {
+  .imgWrapper {
+    height: 150px;
+    width: 150px;
+  }
+
+  .hideTopPlay {
+    display: initial;
+  }
+
+  .imgWrapper img {
+    height: 150px;
+    width: 150px;
+  }
+
+  .title {
+    font-size: .9rem;
+  }
+
+  .time {
+    margin: 0;
+    font-size: .95rem;
+  }
+
+  .descDesktop {
+    display: initial;
+  }
+
+  .bottomBar {
+    display: none;
+  }
+
+  .midRow {
+    margin-top: .1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .playWrapper {
+    margin: 0;
+    padding: 0;
+    margin-left: .6rem;
+  }
+
+  .episodeInfo {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .title {
+    font-size: 1rem;
+  }
+
+  .descDesktop {
+    font-size: .85rem;
+  }
+
+  .time {
+    margin: 0;
+    font-size: 1.07rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .episodeInfo {
+    margin-left: .4rem;
+  }
+
+  .time {
+    font-size: 1.1rem;
+  }
+
+  .descDesktop {
+    font-size: .94rem;
+  }
+
+  .playWrapper a {
+    font-size: 1rem;
+  }
+
+  .imgWrapper {
+    height: 180px;
+    width: 180px;
+  }
+
+  .imgWrapper img {
+    height: 180px;
+    width: 180px;
+  }
 }

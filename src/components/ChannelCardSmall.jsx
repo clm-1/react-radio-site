@@ -45,6 +45,7 @@ const ChannelCardSmall = ({ channel }) => {
           <h4 className={style.title}>{ channel.name }</h4>
           { loggedInUser && renderHeart() }
         </div>
+        <hr/>
         <p className={style.description}>{ channel.channeltype }</p>
         <span className={style.broadcastInfo}>{ channel.tagline && channel.tagline.slice(0, 70) }...</span>
       </div>
