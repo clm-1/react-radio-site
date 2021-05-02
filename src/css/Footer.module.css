@@ -15,7 +15,7 @@
 
 .footerTitle {
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin-top: 1.3rem;
 }
 
@@ -23,8 +23,19 @@
   font-weight: 300;
   font-style: italic;
   margin-bottom: .8rem;
+  font-size: .85rem;
 }
 
 .footerContent span {
-  font-size: .9rem;
+  font-size: .8rem;
+}
+
+@media screen and (min-width: 550px) {
+  .footerContent p {
+    font-size: .9rem;
+  }
+
+  .footerContent span {
+    font-size: .9rem;
+  }
 }
