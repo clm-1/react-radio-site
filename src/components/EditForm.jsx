@@ -128,6 +128,10 @@ const EditForm = ({ user }) => {
     { id: 'first-name', label: 'Förnamn:', type: 'text', value: firstName, function: handleFirstNameChange },
     { id: 'last-name', label: 'Efternamn:', type: 'text', value: lastName, function: handleLastNameChange }];
 
+  const emailInputs = [
+    { id: 'email', label: 'E-post:', type: 'email', value: email, function: handleEmailChange },
+    { id: 'email-confirmation', label: 'E-post (bekräfta):', type: 'email', value: emailConfirmation, function: handleEmailConfirmationChange }];
+
   return ( 
       <div>
         <div className={style.editTitleRow}>
@@ -152,6 +156,25 @@ const EditForm = ({ user }) => {
           </div>
 
           <div className={style.inputRow}>
+            { emailInputs.map((input, index) => (
+              <div key={index} className={style.inputItem}>
+                <label htmlFor={input.id}>{ input.label }</label>
+                <div className={style.inputWrapper}>
+                  <input 
+                    id={input.id} 
+                    type={input.type}
+                    value={input.value} 
+                    onChange={input.function} 
+                    required />
+                  <div className={style.iconWrapper}>
+                    { checkMatch('email') }
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* <div className={style.inputRow}>
             <div className={style.inputItem}>
               <label htmlFor="email">E-post:</label>
               <div className={style.inputWrapper}>
@@ -180,7 +203,7 @@ const EditForm = ({ user }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           { emailExists && <p className={style.inputInfo}>Den adressen finns redan registrerad</p> }
  
