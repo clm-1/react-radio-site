@@ -1,0 +1,128 @@
+.tabLinks {
+  display: flex;
+  margin-bottom: .7rem;
+}
+
+.tabLinks * {
+  position: relative;
+  font-size: .85rem;
+  margin-right: .8rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.tabLinks *:hover {
+  top: -1px;
+}
+
+.notActive {
+  opacity: .6;
+}
+
+.listWrapper {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: .5rem;
+}
+
+.scheduleItem {
+  padding: .3rem .3rem .3rem .5rem;
+  min-height: 75px;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.356);
+}
+
+.scheduleItem .scheduleInfo {
+  max-width: 85%;
+  margin-bottom: .4rem;
+}
+
+.scheduleItem .scheduleTitle {
+  font-size: .9rem;
+  font-weight: 500;
+  margin-bottom: .1rem;
+}
+
+.scheduleItem .scheduleDesc {
+  font-size: .75rem;
+  opacity: .8;
+}
+
+.scheduleItem .scheduleTime {
+  font-family: 'Open Sans';
+  align-self: flex-start;
+  text-align: right;
+  color: rgb(21, 78, 133);
+  margin-right: .9rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.hrLine {
+  margin-bottom: .5rem;
+}
+
+.scheduleDateRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dateTitle {
+  font-size: 1.4rem;
+  margin-bottom: .5rem;
+  font-weight: 400;
+}
+
+.scheduleDateRow input {
+  margin-left: .5rem;
+  cursor: pointer;
+}
+
+.scheduleDateRow label {
+  font-size: .8rem;
+}
+
+@media screen and (min-width: 430px) {
+  .dateTitle {
+    font-size: 1.4rem;
+  }
+
+  .tabLinks * {
+    font-size: .95rem;
+  }
+
+  .scheduleItem .scheduleTime {
+    font-size: 1.5rem;
+  }
+
+  .scheduleItem .scheduleTitle {
+    font-size: 1.05rem;
+  }
+
+  .scheduleItem .scheduleDesc {
+    font-size: .8rem;
+  }
+
+  .dateTitle {
+    margin-bottom: 0;
+  }
+
+  .scheduleDateRow {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .scheduleDateRow label {
+    font-size: .9rem;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .listWrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

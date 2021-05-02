@@ -1,0 +1,41 @@
+.footerWrapper {
+  width: 100%;
+  height: 200px;
+  margin-top: 2.5rem;
+  background-color: rgb(82, 138, 173);
+}
+
+.footerContent {
+  margin: 0 auto;
+  padding: 1.2rem;
+  max-width: 1050px;
+  color: white;
+  text-align: center;
+}
+
+.footerTitle {
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-top: 1.3rem;
+}
+
+.footerContent p {
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: .8rem;
+  font-size: .85rem;
+}
+
+.footerContent span {
+  font-size: .8rem;
+}
+
+@media screen and (min-width: 550px) {
+  .footerContent p {
+    font-size: .9rem;
+  }
+
+  .footerContent span {
+    font-size: .9rem;
+  }
+}

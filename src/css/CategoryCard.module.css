@@ -1,0 +1,27 @@
+.categoryCard {
+  margin-bottom: .4rem;
+  cursor: pointer;
+  background-color: rgb(241, 241, 241);
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: .95rem;
+  padding: .5rem; 
+  text-align: center;
+}
+
+.categoryCard img {
+  max-width: 100%;
+}
+
+.categoryCard p {
+  font-weight: 400;
+}
+
+@media screen and (min-width: 400px) {
+  .categoryCard {
+    font-size: 1.1rem;
+    height: 130px;
+  }
+}

@@ -1,0 +1,43 @@
+.channelCard {
+  cursor: pointer;
+  margin-bottom: .4rem;
+}
+
+.channelCard img {
+  position: relative;
+  max-width: 100%;
+}
+
+.channelCard img:hover {
+  top: -1px;
+}
+
+.channelName {
+  padding-top: .1rem;
+  font-size: .65rem;
+}
+
+.channelCard img:active {
+  outline: none;
+  transform: scale(1.005);
+}
+
+.channelCard p {
+  margin-top: -.3rem;
+}
+
+@media screen and (min-width: 380px) {
+  .channelName {
+    position: relative;
+    top: -6px;
+    display: initial;
+    font-size: .8rem;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .channelName {
+    top: -2px;
+    font-size: 1rem;
+  }
+}

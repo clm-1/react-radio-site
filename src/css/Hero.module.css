@@ -1,0 +1,43 @@
+.heroWrapper {
+  width: 100%;
+  margin-bottom: .7rem;
+}
+
+.programCard {
+  width: 50%;
+  cursor: pointer;
+}
+
+.programCard:hover {
+  transform: scale(1.005);
+}
+
+.focusPrograms {
+  margin-bottom: .5rem;
+  font-size: .95rem;
+  font-weight: normal;
+}
+
+.programCard img {
+  width: 100%;
+}
+
+.hideOnSmall {
+  display: none;
+}
+
+.cardsWrapper {
+  display: flex;
+  margin-top: .7rem;
+  gap: .5rem;
+}
+
+@media screen and (min-width: 670px) {
+  .hideOnSmall {
+    display: initial;
+  }
+
+  .programCard {
+    width: 33%;
+  }
+}
