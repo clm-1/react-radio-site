@@ -26,7 +26,7 @@ const login = (req, res) => {
       res.json({ success: 'Login successful', loggedInUser: userInDb });
       return;
     } else {
-      res.status(401).json({ error: 'Bad credentials' });
+      res.json({ error: 'Bad credentials' });
       return;
     }
   })

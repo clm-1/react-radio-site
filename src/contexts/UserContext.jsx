@@ -61,12 +61,10 @@ const UserDataProvider = (props) => {
   }
 
   const logout = async () => {
-    let result = await fetch('/api/v1/users/logout');
-    result = await result.json();
+    await fetch('/api/v1/users/logout');
     setLoggedInUser(null);
     setUserFavourites(null);
     history.push('/');
-    console.log(result);
   }
 
   const register = async (userToRegister) => {
