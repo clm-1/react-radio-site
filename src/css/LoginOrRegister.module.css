@@ -59,7 +59,14 @@
 .infoTextBottom {
   cursor: pointer;
   text-align: center;
+  font-size: .75rem;
   color: rgb(21, 78, 133);
+}
+
+@media screen and (min-width: 400px) {
+  .infoTextBottom {
+    font-size: .85rem;
+  }
 }
 
 @media screen and (min-width: 630px) {

@@ -6,8 +6,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   bottom: 10px;
   right: -100px;
   cursor: pointer;
@@ -16,10 +16,21 @@
 }
 
 .scrollUpBtn p {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   transform: scale(1.35, .8);
 }
 
 .showBtn {
   right: 10px;
+}
+
+@media screen and (min-width: 400px) {
+  .scrollUpBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scrollUpBtn p {
+    font-size: 1.3rem;
+  }
 }

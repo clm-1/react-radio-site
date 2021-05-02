@@ -56,7 +56,7 @@ const UserPage = () => {
     let sortedChannels = [...userFavourites.channels].sort((a, b) => (a.channel.name > b.channel.name) ? 1 : -1);
     channelList = 
       <div className={style.listWrapper}>
-        { sortedChannels.length === 0 && <p>Du har inte favoritmarkerat några kanaler.</p>}
+        { sortedChannels.length === 0 && <p className={style.noFavourites}>Du har inte favoritmarkerat några kanaler.</p>}
         {sortedChannels.map(channel => (
           <ChannelCardSmall key={channel.channel.id} channel={channel.channel} />
         ))}
@@ -68,7 +68,7 @@ const UserPage = () => {
     let sortedPrograms = [...userFavourites.programs].sort((a, b) => (a.program.name > b.program.name) ? 1 : -1);
     programList = 
       <div className={style.listWrapper}>
-        { sortedPrograms.length === 0 && <p>Du har inte favoritmarkerat några program.</p>}
+        { sortedPrograms.length === 0 && <p className={style.noFavourites}>Du har inte favoritmarkerat några program.</p>}
         {sortedPrograms.map(program => (
           <ProgramCard key={program.program.id} program={program.program} />
         ))}

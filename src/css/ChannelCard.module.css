@@ -13,7 +13,7 @@
 }
 
 .channelName {
-  display: none;
+  padding-top: .1rem;
   font-size: .65rem;
 }
 

@@ -17,7 +17,6 @@ const CategoryProgramList = () => {
   let title = 'Laddar...'
   if (categoryPrograms) {
     title = categoryPrograms[0].programcategory.name;
-    console.log(categoryPrograms);
     content = categoryPrograms.map(program => (
       <ProgramCard key={program.id} program={program} />
     ))

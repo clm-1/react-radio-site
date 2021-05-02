@@ -21,8 +21,6 @@ const EpisodeCard = ({ episode }) => {
     line = <hr></hr>
   }
 
-  // <i className="far fa-play-circle"></i>
-
   return ( 
     <div className={style.episodeCardWrapper}>
       <div className={style.imgAndInfo}>
@@ -50,7 +48,7 @@ const EpisodeCard = ({ episode }) => {
           </div>
         </div>
       </div>
-      <div onClick={() => setMoreInfo(!moreInfo)} className={style.bottomBar}><p>Läs mer / Spela</p></div>
+      <div onClick={() => setMoreInfo(!moreInfo)} className={style.bottomBar}><p>Läs mer / Lyssna</p></div>
       { moreInfo && 
         <div className={style.moreInfo}>
           <p>{ episode.description }</p>

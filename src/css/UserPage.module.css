@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.noFavourites {
+  font-size: .75rem;
+}
+
 .userBox {
   display: flex;
   flex-direction: column;
@@ -47,7 +51,7 @@
   background-color: rgb(82, 138, 173);
   border: none;
   color: white;
-  font-size: .9rem;
+  font-size: .82rem;
 }
 
 .userBtns button:active {
@@ -57,7 +61,7 @@
 
 .favouritesInfo {
   font-style: italic;
-  font-size: .85rem;
+  font-size: .68rem;
   font-weight: 300;
   margin-top: .5rem;
 }
@@ -125,13 +129,13 @@
   align-items: center;
   padding: 2rem;
   justify-content: center;
-  height: 110px;
+  height: 7px;
   background-color: rgb(241, 241, 241);
 }
 
 .noFavMessage {
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: .85rem;
   font-weight: 300;
 }
 
@@ -139,10 +143,42 @@
   display: none;
 }
 
+@media screen and (min-width: 400px) {
+  .noFavouritesCard {
+    height: 9px;
+  }
+
+  .noFavourites {
+    font-size: .88rem;
+  }
+
+  .userBtns button {
+    font-size: .9rem;
+  }
+
+  .favouritesInfo {
+    font-size: .85rem;
+  }
+
+  .noFavMessage {
+    font-size: .95rem;
+  }
+} 
+
 @media screen and (min-width: 650px) {
   .userHeader {
     flex-direction: row;
     height: 280px;
+  }
+
+  .noFavouritesCard {
+    padding: 2rem;
+    height: 105px;
+  }
+
+  .noFavMessage {
+    font-size: 1.1rem;
+    font-weight: 300;
   }
 
   .hideLatest {

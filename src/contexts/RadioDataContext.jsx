@@ -66,7 +66,6 @@ const RadioDataProvider = (props) => {
   const getAllProgramsByCategory = async (categoryId) => {
     let categoryPrograms = await fetch(`/api/v1/categories/${categoryId}/programs`);
     categoryPrograms = await categoryPrograms.json();
-    console.log(categoryPrograms);
     setCategoryPrograms(categoryPrograms.programs);
   }
 
