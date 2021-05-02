@@ -57,7 +57,6 @@ const RadioDataProvider = (props) => {
   }
 
   const getChannelSchedule = async (channelId, date) => {
-    console.log(date);
     let scheduleDate = date ? `?date=${date}` : ``;
     let schedule = await fetch(`/api/v1/channels/${channelId}/schedule${scheduleDate}`);
     schedule = await schedule.json();

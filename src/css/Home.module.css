@@ -19,7 +19,7 @@
 
 .tabLinks * {
   position: relative;
-  font-size: .95rem;
+  font-size: .85rem;
   margin-right: .8rem;
   margin-bottom: .2rem;
   font-weight: normal;
@@ -37,6 +37,10 @@
 @media screen and (min-width: 400px) {
   .tabLinks {
     flex-direction: row;
+  }
+
+  .tabLinks * {
+    font-size: .95rem;
   }
 }
 

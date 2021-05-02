@@ -5,7 +5,7 @@
 
 .tabLinks * {
   position: relative;
-  font-size: .95rem;
+  font-size: .85rem;
   margin-right: .8rem;
   font-weight: normal;
   cursor: pointer;
@@ -89,6 +89,10 @@
 @media screen and (min-width: 430px) {
   .dateTitle {
     font-size: 1.4rem;
+  }
+
+  .tabLinks * {
+    font-size: .95rem;
   }
 
   .scheduleItem .scheduleTime {

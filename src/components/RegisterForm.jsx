@@ -63,12 +63,6 @@ const RegisterForm = () => {
       return;
     }
     if (email !== emailConfirmation || password !== passwordConfirmation) {
-      // if (email !== emailConfirmation) {
-      //   console.log('Epost-fälten stämmer inte överens');
-      // }
-      // if (password !== passwordConfirmation) {
-      //   console.log('Lösenorden stämmer inte')
-      // }
       return;
     } else {
       const userToRegister = {
