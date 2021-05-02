@@ -132,6 +132,10 @@ const EditForm = ({ user }) => {
     { id: 'email', label: 'E-post:', type: 'email', value: email, function: handleEmailChange },
     { id: 'email-confirmation', label: 'E-post (bekräfta):', type: 'email', value: emailConfirmation, function: handleEmailConfirmationChange }];
 
+  const passwordInputs = [
+    { id: 'password', label: 'Lösenord:', type: 'password', value: password, function: handlePasswordChange },
+    { id: 'password-confirmation', label: 'Lösenord (bekräfta):', type: 'password', value: passwordConfirmation, function: handlePasswordConfirmationChange }];
+
   return ( 
       <div>
         <div className={style.editTitleRow}>
@@ -174,40 +178,28 @@ const EditForm = ({ user }) => {
             ))}
           </div>
 
-          {/* <div className={style.inputRow}>
-            <div className={style.inputItem}>
-              <label htmlFor="email">E-post:</label>
-              <div className={style.inputWrapper}>
-                <input 
-                  id="email" 
-                  type="email"
-                  value={email} 
-                  onChange={handleEmailChange} 
-                  required />
-                <div className={style.iconWrapper}>
-                  { checkMatch('email') }
-                </div>
-              </div>
-            </div>
-            <div className={style.inputItem}>
-              <label htmlFor="email-confirmation">E-post (Bekräfta):</label>
-              <div className={style.inputWrapper}>
-                <input 
-                  id="email-confirmation" 
-                  type="email"
-                  value={emailConfirmation} 
-                  onChange={handleEmailConfirmationChange} 
-                  required />
-                <div className={style.iconWrapper}>
-                  { checkMatch('email') }
-                </div>
-              </div>
-            </div>
-          </div> */}
-
           { emailExists && <p className={style.inputInfo}>Den adressen finns redan registrerad</p> }
- 
+
           <div className={style.inputRow}>
+            { passwordInputs.map((input, index) => (
+              <div key={index} className={style.inputItem}>
+                <label htmlFor={input.id}>{ input.label }</label>
+                <div className={style.inputWrapper}>
+                  <input 
+                    id={input.id} 
+                    type={input.type}
+                    value={input.value} 
+                    onChange={input.function} 
+                    required />
+                  <div className={style.iconWrapper}>
+                    { checkMatch('password') }
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+ 
+          {/* <div className={style.inputRow}>
             <div className={style.inputItem}>
               <label htmlFor="password">Lösenord:</label>
               <div className={style.inputWrapper}>
@@ -236,7 +228,7 @@ const EditForm = ({ user }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           
          <div className={style.btnRow}>
             <div> { renderPasswordInfo() } </div>
