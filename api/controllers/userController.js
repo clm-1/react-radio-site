@@ -15,7 +15,7 @@ const login = (req, res) => {
 
   db.get(query, params, (err, userInDb) => {
     if (!userInDb) {
-      res.status(401).json({ error: 'Bad credentials' });
+      res.json({ error: 'Bad credentials' });
       return;
     }
 
