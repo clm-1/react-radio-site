@@ -70,6 +70,7 @@ const ProgramDetails = (props) => {
     }
   }
 
+  // Render header using the DetailsHeader-component, send down prop with this program
   let header = 'Laddar...';
   if (program) {
     const headerContent = {

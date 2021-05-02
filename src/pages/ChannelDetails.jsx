@@ -58,6 +58,7 @@ const ChannelDetails = (props) => {
     // eslint-disable-next-line
   }, [date]);
 
+  // List schedule based on selected date
   let schedule = 'Laddar...';
   if (channelSchedule) {
     schedule = <div>
