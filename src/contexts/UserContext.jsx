@@ -1,9 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { RadioDataContext } from './RadioDataContext';
 
 export const UserContext = createContext();
 
 const UserDataProvider = (props) => {
+  const { getProgramById, getChannelById } = useContext(RadioDataContext);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
   const [editUser, setEditUser] = useState(false);
@@ -117,8 +119,27 @@ const UserDataProvider = (props) => {
         body: JSON.stringify({ showId, type }),
       });      
       result = await result.json();
+
+      // Get new program from API and add it to userFavourites-array
+      if (type === 'program') {
+        let program = await getProgramById(result.item.showId);
+        const newList = {
+          channels: userFavourites.channels,
+          programs: [...userFavourites.programs, {program: program}]
+        };
+        setUserFavourites(newList);
+      }
+      if (type === 'channel') {
+        let channel = await getChannelById(result.item.showId);
+        const newList = {
+          channels: [...userFavourites.channels, {channel: channel}],
+          programs: userFavourites.programs,
+        };
+        setUserFavourites(newList);
+      }
+      console.log(userFavourites);
       console.log(result);
-      getFavouritesByUserId(loggedInUser.userId);
+      // getFavouritesByUserId(loggedInUser.userId);
     }
   }
 
