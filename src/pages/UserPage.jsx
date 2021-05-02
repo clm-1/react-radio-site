@@ -9,6 +9,8 @@ const UserPage = () => {
   const { loggedInUser, userFavourites, logout, editUser, setEditUser, hideLatest, setHideLatest, whoami} = useContext(UserContext);
   const [tab, setTab] = useState('programs');
 
+  // Show/hide edit-form
+  // Show/hide latest favourites on smaller screens
   const handleEditBtn = () => {
     setEditUser(!editUser);
     setHideLatest(!hideLatest);
@@ -42,6 +44,7 @@ const UserPage = () => {
       </div>
   }
 
+  // Map out channels and programs separately from userFavourites-array
   let channelList = 'Laddar...';
   if (userFavourites) {
     let sortedChannels = [...userFavourites.channels].sort((a, b) => (a.channel.name > b.channel.name) ? 1 : -1);

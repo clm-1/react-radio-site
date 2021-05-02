@@ -38,14 +38,17 @@ const EditForm = ({ user }) => {
       setEmail(user.email)
       setEmailConfirmation(user.email)
     }
-  }, [user])
+    // eslint-disable-next-line
+  }, [])
 
+  // Check if email matches
   useEffect(() => {
     if (email === emailConfirmation) 
     { setEmailCheck(true); } else { setEmailCheck(false); }
     // eslint-disable-next-line
   }, [email, emailConfirmation]);
 
+  // Check if password matches
   useEffect(() => {
     if (password === passwordConfirmation && password.match(pattern)) { setPasswordCheck(true); } else { setPasswordCheck(false); }
     // eslint-disable-next-line

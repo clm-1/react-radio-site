@@ -8,6 +8,7 @@ const LoginOrRegister = () => {
   const [registerForm, setRegisterForm] = useState(false);
   const history = useHistory();
 
+  // Check if user is alreay logged in
   const checkLoggedIn = async () => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
@@ -21,6 +22,7 @@ const LoginOrRegister = () => {
     // eslint-disable-next-line
   })
 
+  // Render message on login page
   const renderInfo = (hideSmall) => {
     return (
       <div className={`${hideSmall && style.hideSmall}`}>

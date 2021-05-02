@@ -14,6 +14,7 @@ const Home = () => {
     // eslint-disable-next-line
   }, [])
 
+  // Render content depending on which tab is set on home page
   let content = 'Laddar...';  
   if (channels && popularChannels && categories) {
     if (tab === 'all') {

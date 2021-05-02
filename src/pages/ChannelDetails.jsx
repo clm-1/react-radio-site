@@ -24,6 +24,7 @@ const ChannelDetails = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  // Header will load with different data depending on if it's a channel or a program
   let header = 'Laddar...';
   if (oneChannel) {
     const headerContent = {
