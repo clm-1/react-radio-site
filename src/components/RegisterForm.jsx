@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/RegisterForm.module.css';
 
@@ -12,6 +13,8 @@ const RegisterForm = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
+  const history = useHistory();
   
   let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -24,10 +27,12 @@ const RegisterForm = () => {
   }
 
   const handleEmailChange = (e) => {
+    setEmailExists(false);
     setEmail(e.target.value);
   }
 
   const handleEmailConfirmationChange = (e) => {
+    setEmailExists(false);
     setEmailConfirmation(e.target.value);
   }
 
@@ -71,19 +76,14 @@ const RegisterForm = () => {
         email,
         password,
       }
-      console.log(userToRegister);
+
       let result = await register(userToRegister);
       if (result.success) {
-        console.log(result.success, result);
-      } else {
-        console.log(result.error);
+        history.push('/user');
+      } else if (result.error) {
+        setEmailExists(true);
+        return;
       }
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setEmailConfirmation('');
-      setPassword('');
-      setPasswordConfirmation('');
     }
   }
 
@@ -110,7 +110,7 @@ const RegisterForm = () => {
     if (!passwordCheck) {
       if (password || passwordConfirmation) {
         return (
-          <p className={`${style.passwordInfo}`}>Lösenordet måste vara minst 8 tecken långt samt innehålla minst en stor bokstav, en siffra och ett specialtecken</p>
+          <p className={`${style.inputInfo}`}>Lösenordet måste vara minst 8 tecken långt samt innehålla minst en stor bokstav, en siffra och ett specialtecken</p>
         )
       }
     }
@@ -159,6 +159,7 @@ const RegisterForm = () => {
             { checkMatch('email') }
           </div>
         </div>
+        { emailExists && <p className={style.inputInfo}>Den adressen finns redan registrerad</p> }
         <label htmlFor="password">Lösenord:</label>
         <div className={style.inputWrapper}>
           <input 

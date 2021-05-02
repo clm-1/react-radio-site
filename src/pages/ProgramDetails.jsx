@@ -21,6 +21,7 @@ const ProgramDetails = (props) => {
     }
   }
 
+  // Gets a limited number of episodes from now
   const getAllEpisodesByProgam = async (programId) => {
     let toDate = new Date(Date.now() + 24*60*60*1000).toISOString().slice(0, 10)
     let fromDate = toDate.slice(0, 4) - 2 + toDate.slice(4, 10);
@@ -57,6 +58,7 @@ const ProgramDetails = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  // Get all episodes from all time for this channel
   const getAllEpisodes = async () => {
     let dateString = '';
     let episodes = await fetch(`/api/v1/episodes/${programId}${dateString}`)
@@ -100,11 +102,13 @@ const ProgramDetails = (props) => {
     ))
   }
 
+  // Set rendered episodes to all episodes instead of the limited list it starts out with
   const buttonClick = () => {
     setEpisodes(allEpisodes)
     setAllLoaded(true);
   }
 
+  // Show button if all episodes have not been loaded already
   const renderButton = () => {
     if (allEpisodes && tab === 'all') {
       if (allEpisodes.length > episodes.length) {

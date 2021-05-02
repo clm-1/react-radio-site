@@ -13,6 +13,8 @@ const DetailsHeader = ({ headerContent }) => {
     removeFavourite(headerContent.id, headerContent.type);
   }
 
+  // Header-content is slightly different for channel and program
+  // Takes in data as a prop
   const renderHeart = () => {
     let inFavourites = false;
     if (userFavourites) {

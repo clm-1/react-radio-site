@@ -26,7 +26,7 @@ const login = (req, res) => {
       res.json({ success: 'Login successful', loggedInUser: userInDb });
       return;
     } else {
-      res.status(401).json({ error: 'Bad credentials' });
+      res.json({ error: 'Bad credentials' });
       return;
     }
   })
@@ -36,13 +36,6 @@ const logout = (req, res) => {
   delete req.session.user;
   res.json({ success: 'Logout successful' });
 };
-
-// const getAllUsers = (req, res) => {
-//   let query = `SELECT * FROM users`;
-//   db.all(query, (err, users) => {
-//     res.json(users);
-//   })
-// }
 
 const getUserById = (req, res) => {
   if (!req.session.user) {
@@ -84,7 +77,7 @@ const register = (req, res) => {
 
   db.get(query, params, (err, userExists) => {
     if (userExists) {
-      res.status(400).json({ error: 'A user with that email address already exits' });
+      res.json({ error: 'A user with that email address already exits' });
     } else {
       req.body.password = encrypt.encrypt(req.body.password);
       query = `
@@ -99,7 +92,6 @@ const register = (req, res) => {
 
       db.run(query, params, function (err) {
         if (err) {
-          console.log('error:', err)
           res.json({ error: err });
         } else {
           req.session.user = {
@@ -121,7 +113,7 @@ const editUserInfo = (req, res) => {
 
   db.get(query, params, (err, emailUsed) => {
     if (emailUsed && emailUsed.email !== req.session.user.email) {
-      res.status(400).json({ emailExists: 'A user with that email address already exits' });
+      res.json({ emailExists: 'A user with that email address already exits' });
     } else {
       req.body.password = encrypt.encrypt(req.body.password);
       query = `UPDATE users SET firstName = $firstName, lastName = $lastName, email = $email, password = $password WHERE userId = $userId`;
@@ -188,7 +180,6 @@ const addFavourite = (req, res) => {
   }
   db.run(query, params, function (err) {
     if (err) {
-      console.log(err);
       if (err.code === 'SQLITE_CONSTRAINT') res.json({ error: 'Already in favourites'});
     } else {
       res.json({ success: 'Favourite added', 
@@ -203,7 +194,6 @@ const addFavourite = (req, res) => {
 }
 
 module.exports = {
-  // getAllUsers,
   getUserById,
   getFavouritesByUserId,
   register,

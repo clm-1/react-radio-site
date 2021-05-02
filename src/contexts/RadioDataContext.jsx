@@ -12,6 +12,7 @@ const RadioDataProvider = (props) => {
   const [popularChannels, setPopularChannels] = useState(null);
   const [inFocus, setInFocus] = useState(null);
   const [popularChannelsIds] = useState([132, 163, 164, 701, 224, 226, 4540, 2576, 2755, 212, 210]);
+  // This tab-state sets the tab on the home page
   const [tab, setTab] = useState('popular');
 
 
@@ -20,6 +21,7 @@ const RadioDataProvider = (props) => {
     channels = await channels.json();
     setChannels(channels.channels)
 
+    // Pick out a couple of channels to be displayed first in the "popular"-tab on the home page
     let temp = channels.channels.filter(channel => popularChannelsIds.includes(channel.id));
     setPopularChannels(temp);
   }
@@ -63,12 +65,14 @@ const RadioDataProvider = (props) => {
     setChannelSchedule(schedule.schedule);
   }
 
+  // Set programs based on category, display on home page
   const getAllProgramsByCategory = async (categoryId) => {
     let categoryPrograms = await fetch(`/api/v1/categories/${categoryId}/programs`);
     categoryPrograms = await categoryPrograms.json();
     setCategoryPrograms(categoryPrograms.programs);
   }
 
+  // Sets the featured programs on the home page based on id:s
   const setFocus = async () => {
     let focusProgramsIds = [1646, 407, 5177];
     let focusPrograms = [];

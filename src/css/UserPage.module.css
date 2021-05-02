@@ -129,7 +129,7 @@
   align-items: center;
   padding: 2rem;
   justify-content: center;
-  height: 7px;
+  min-height: 76px;
   background-color: rgb(241, 241, 241);
 }
 
@@ -145,7 +145,7 @@
 
 @media screen and (min-width: 400px) {
   .noFavouritesCard {
-    height: 9px;
+    min-height: 111px;
   }
 
   .noFavourites {
@@ -173,7 +173,7 @@
 
   .noFavouritesCard {
     padding: 2rem;
-    height: 105px;
+    min-height: 110px;
   }
 
   .noFavMessage {

@@ -28,11 +28,9 @@ const LoginForm = () => {
     }
     let result = await login(userToLogin);
     if (result.success) {
-      console.log(result.success);
       history.push('/user');
     } else {
       setLoginFailed(true);
-      console.log(result.error);
     }
   }
 
