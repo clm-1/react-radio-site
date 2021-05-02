@@ -3,28 +3,28 @@ import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import style from '../css/ProgramCard.module.css';
 
-const ProgramCard = ({ program }) => {
+const ChannelCardSmall = ({ channel }) => {
   const { loggedInUser, userFavourites, addFavourite, removeFavourite } = useContext(UserContext);
   const history = useHistory();
 
   const handleAddFavourite = (e) => {
     e.stopPropagation();
-    addFavourite(program.id, 'program');
+    addFavourite(channel.id, 'channel');
   }
 
   const handleRemoveFavourite = (e) => {
     e.stopPropagation();
-    removeFavourite(program.id, 'program');
+    removeFavourite(channel.id, 'channel');
   }
 
   const renderHeart = () => {
     let inFavourites = false;
     if (userFavourites) {
       userFavourites.channels.forEach(favourite => {
-        if (favourite.channel.id === program.id) inFavourites = true;
+        if (favourite.channel.id === channel.id) inFavourites = true;
       })
-      userFavourites.programs.forEach(favourite => {
-        if (favourite.program.id === program.id) inFavourites = true;
+      userFavourites.channels.forEach(favourite => {
+        if (favourite.channel.id === channel.id) inFavourites = true;
       })
     }
 
@@ -36,21 +36,21 @@ const ProgramCard = ({ program }) => {
   }
 
   return ( 
-    <div className={style.programCard} onClick={() => history.push(`/programs/${program.id}`)}> 
+    <div className={style.programCard} onClick={() => history.push(`/channels/${channel.id}`)}> 
       <div className={style.imgWrapper}>
-        <img src={program.programimage} alt=""/>
+        <img src={channel.image} alt=""/>
       </div>
       <div className={style.infoText}>
         <div className={style.titleRow}>
-          <h4 className={style.title}>{ program.name }</h4>
+          <h4 className={style.title}>{ channel.name }</h4>
           { loggedInUser && renderHeart() }
         </div>
         <hr/>
-        <p className={style.description}>{ program.channel.name !== '[No channel]' ? `${program.channel.name}` : 'Kanal Ipsum' } { program.programcategory ? `- ${program.programcategory.name}` : ''}</p>
-        <span className={style.broadcastInfo}>{ program.broadcastinfo && program.broadcastinfo.slice(0, 110) + '...' }</span>
+        <p className={style.description}>{ channel.channeltype }</p>
+        <span className={style.broadcastInfo}>{ channel.tagline && channel.tagline.slice(0, 70) }...</span>
       </div>
     </div>
    );
 }
  
-export default ProgramCard;
+export default ChannelCardSmall;

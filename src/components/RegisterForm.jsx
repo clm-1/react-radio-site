@@ -37,6 +37,7 @@ const RegisterForm = () => {
     } else {
       setEmailCheck(false);
     }
+    // eslint-disable-next-line
   }, [email, emailConfirmation]);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ const RegisterForm = () => {
       setPasswordCheck(true);
     } else {
       setPasswordCheck(false);
-    }  
+    }
+    // eslint-disable-next-line
   }, [password, passwordConfirmation]);
 
   const handlePasswordChange = (e) => {
@@ -58,17 +60,9 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!password.match(pattern)) {
-      console.log('kasst lösenord');
       return;
     }
     if (email !== emailConfirmation || password !== passwordConfirmation) {
-      console.log('Blev strul!')
-      if (email !== emailConfirmation) {
-        console.log('Epost-fälten stämmer inte överens');
-      }
-      if (password !== passwordConfirmation) {
-        console.log('Lösenorden stämmer inte')
-      }
       return;
     } else {
       const userToRegister = {
@@ -80,7 +74,7 @@ const RegisterForm = () => {
       console.log(userToRegister);
       let result = await register(userToRegister);
       if (result.success) {
-        console.log(result.success);
+        console.log(result.success, result);
       } else {
         console.log(result.error);
       }

@@ -6,13 +6,8 @@ import style from '../css/Navbar.module.css';
 
 const Navbar = () => {
   const { setTab } = useContext(RadioDataContext);
-  const { loggedInUser, logout } = useContext(UserContext);
+  const { loggedInUser } = useContext(UserContext);
   const history = useHistory();
-  
-  let userContent = 'Inte inloggad';
-  if (loggedInUser) {
-    userContent = <p>Inloggad som: {loggedInUser.firstName} {loggedInUser.lastName}</p>
-  }
 
   const logoClick = () => {
     history.push('/');
@@ -23,19 +18,22 @@ const Navbar = () => {
       <div className={style.navbarWrapper}>
         <nav>
           <div className={style.logo} onClick={() => logoClick()}>
-            A LOGO
+            RADIOswe
           </div>
           <div className={style.linkWrapper}>
             <NavLink exact to="/" activeClassName={style.activeLink}>Kanaler {`&`} Program</NavLink>
-            <NavLink exact to="/about" activeClassName={style.activeLink}>Om sidan</NavLink>
           </div>
-          <div className={style.accountLinks}>
-            { loggedInUser ? 
-              <span className={style.navName}>Inloggad som: { loggedInUser.firstName }</span> : ''}
-            { loggedInUser ? 
-              <button className={style.registerBtn} onClick={() => history.push('/user')}>Mina sidor</button> :
-              <button className={style.registerBtn} onClick={() => history.push('/login')}>Logga in</button>}
-            {/* <button onClick={() => logout()}>Logga ut</button> */}
+          <div className={style.btnWrapper}>
+            <div className={style.homeLinkWrapper}>
+              <button onClick={() => history.push('/')} className={`${style.userBtn} ${style.hideBtn}`}>Kanaler {`&`} Program</button>
+            </div>
+            <div className={style.accountLinks}>
+              { loggedInUser ? 
+                <span className={style.navName}>Inloggad som: { loggedInUser.firstName }</span> : ''}
+              { loggedInUser ? 
+                <button className={style.userBtn} onClick={() => history.push('/user')}>Mina sidor</button> :
+                <button className={style.userBtn} onClick={() => history.push('/login')}>Logga in</button>}
+            </div>
           </div>
       </nav>
     </div>

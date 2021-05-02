@@ -2,21 +2,21 @@
   width: 100%;
   background-color: rgb(241, 241, 241);
   display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
 }
 
 .headerInfo {
   flex: 1;
-  padding: 1rem;
+  padding: .3rem .6rem .6rem .6rem;
 }
 
 .headerImgWrapper {
-  height: 230px;
-  background-color: salmon
+  width: 100%;
 }
 
 .headerImgWrapper img {
-  height: 100%;
+  width: 100%;
 }
 
 .titleRow {
@@ -28,22 +28,144 @@
 .titleRow i {
   position: relative;
   top: -3px;
-  font-size: 1.9rem;
-  margin-right: .7rem;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-right: .2rem;
+  cursor: pointer;
 }
 
 .title {
-  font-size: 2.1rem;
+  font-size: 1rem;
+  line-height: 1.3;
   font-weight: 400;
   margin-bottom: .3rem;
+  margin-right: .5rem;
 }
 
 .description {
-  margin-top: .4rem;
+  font-size: .9rem;
+  margin-top: .2rem;
 }
 
 .broadcastInfo {
-  font-size: 1.1rem;
+  font-style: italic;
+  font-size: .8rem;
   font-weight: 300;
-  margin-top: .5rem;
+  margin-top: .4rem;
+}
+
+@media screen and (min-width: 440px) {
+  .headerInfo {
+    padding: .3rem .5rem;
+  }
+
+  .headerImgWrapper {
+    width: initial;
+    height: 130px;
+  }
+  
+  .title {
+    font-size: .88rem;
+    margin-right: .3rem;
+  }
+
+  .titleRow {
+    align-items: center;
+  }
+
+  .titleRow i {
+    top: -2px;
+    font-size: 1.2rem;
+    margin-right: .1rem;
+  }
+  
+  .headerImgWrapper img {
+    width: initial;
+    height: 100%;
+  }
+
+  .headerWrapper header {
+    flex-direction: row;
+  }
+
+  .description {
+    font-size: .76rem;
+    line-height: 1.3;
+  }
+
+  .broadcastInfo {
+    margin-top: .2rem;
+    font-size: .73rem;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .description {
+    font-size: .83rem;
+  }
+
+  .headerInfo {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .titleRow i {
+    font-size: 1.5rem;
+  }
+
+  .headerImgWrapper {
+    height: 155px;
+  }
+}
+
+@media screen and (min-width: 570px) {
+  .headerImgWrapper {
+    height: 180px;
+  }
+
+  .description {
+    font-size: .9rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+  
+  .titleRow i {
+    font-size: 1.6rem;
+  }
+
+  .broadcastInfo {
+    margin-top: .3rem;
+    margin-bottom: .5rem;
+    font-size: .92rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .headerImgWrapper {
+    height: 230px;
+  }
+
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .title {
+    font-size: 2.1rem;
+    font-weight: 400;
+    margin-bottom: .3rem;
+  }
+
+  .titleRow i {
+    font-size: 1.9rem;
+  }
+
+  .broadcastInfo {
+    font-size: 1.1rem;
+  }
 }

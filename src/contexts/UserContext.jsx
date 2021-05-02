@@ -8,12 +8,21 @@ const UserDataProvider = (props) => {
   const { getProgramById, getChannelById } = useContext(RadioDataContext);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userFavourites, setUserFavourites] = useState(null);
+  const [editUser, setEditUser] = useState(false);
+  const [hideLatest, setHideLatest] = useState(false);
   const history = useHistory();
 
-  const whoami = async () => {
+  const whoami = async (method) => {
     let result = await fetch('/api/v1/users/whoami');
     result = await result.json();
-    setLoggedInUser(result);
+    if (method === 'set') {
+      setLoggedInUser(result);
+      return;
+    }
+    if (method === 'check' && !result) {
+        history.push('/'); 
+        return;
+    }
   }
 
   const getFavouritesByUserId = async (userId) => {
@@ -22,6 +31,7 @@ const UserDataProvider = (props) => {
    
     let channels = result.filter(item => item.type === 'channel');
     let programs = result.filter(item => item.type === 'program');
+
     let fetchedChannels = [];
     let fetchedPrograms = [];
     for (let i = 0; i < channels.length; i++) {
@@ -46,7 +56,7 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToLogin),
     })
     result = await result.json();
-    whoami();
+    whoami('set');
     return result;
   }
 
@@ -68,17 +78,35 @@ const UserDataProvider = (props) => {
       body: JSON.stringify(userToRegister)
     });
     result = await result.json();
-    if (result.success) {
-      let userToLogin = {
-        email: userToRegister.email,
-        password: userToRegister.password
-      }
-      let loginResult = await login(userToLogin);
-      if (loginResult.success) {
-        console.log('login successful after registration')
-      }
-    }
+    whoami('set');
     return result;
+  }
+
+  const editUserInfo = async (editedInfo) => {
+    let result = await fetch(`/api/v1/users/${loggedInUser.userId}/edit`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(editedInfo),
+    });
+    result = await result.json();
+    whoami('set');
+    return result;
+  }
+
+  const removeFavourite = async (showId, type) => {
+    if (loggedInUser) {
+      let result = await fetch(`/api/v1/users/${loggedInUser.userId}/removefavourite?showId=${showId}&type=${type}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'aplication/json'
+        }
+      });
+      result = await result.json();
+      console.log(result)
+      getFavouritesByUserId(loggedInUser.userId);
+    }
   }
 
   const addFavourite = async (showId, type) => {
@@ -91,15 +119,35 @@ const UserDataProvider = (props) => {
         body: JSON.stringify({ showId, type }),
       });      
       result = await result.json();
+
+      // Get new program from API and add it to userFavourites-array
+      if (type === 'program') {
+        let program = await getProgramById(result.item.showId);
+        const newList = {
+          channels: userFavourites.channels,
+          programs: [...userFavourites.programs, {program: program}]
+        };
+        setUserFavourites(newList);
+      }
+      if (type === 'channel') {
+        let channel = await getChannelById(result.item.showId);
+        const newList = {
+          channels: [...userFavourites.channels, {channel: channel}],
+          programs: userFavourites.programs,
+        };
+        setUserFavourites(newList);
+      }
+      console.log(userFavourites);
       console.log(result);
-      getFavouritesByUserId(loggedInUser.userId);
+      // getFavouritesByUserId(loggedInUser.userId);
     }
   }
 
   // useEffect
 
   useEffect(() => {
-    whoami();
+    whoami('set');
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -114,6 +162,12 @@ const UserDataProvider = (props) => {
     logout,
     userFavourites,
     addFavourite,
+    removeFavourite,
+    editUserInfo,
+    editUser,
+    setEditUser,
+    hideLatest,
+    setHideLatest,
   }
 
   return ( 
